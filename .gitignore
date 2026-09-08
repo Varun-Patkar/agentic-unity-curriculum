@@ -1,0 +1,15 @@
+# This repo is curriculum only. No Unity projects live here.
+# Unity projects live in D:\Projects\Unity Games\<ProjectName>\ as their own repos.
+
+# OS / editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/settings.json
+
+# Scratch space — safe to dump anything here, it is never committed
+scratch/
+*.tmp
+
+# Personal notes you may not want in history (delete this line if you want them tracked)
+progress/private/
