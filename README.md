@@ -79,6 +79,25 @@ Each Unity project is its own git repo. The curriculum never contains game code,
 
 ---
 
+## Using this yourself
+
+This was built for one person, but nothing in it is personal. If you want to run it:
+
+1. Fork or clone the repo. It contains no game code — only the plan.
+2. Read [AGENTS.md](AGENTS.md). It is the file that makes an AI agent behave like a pair rather than a code vending machine. Most of the value is there.
+3. Change the game. `Hearthfall` is a placeholder — swap [reference/story-bible.md](reference/story-bible.md) for your own premise and the milestones still hold, because they teach systems, not content.
+4. Reset [progress/STATE.md](progress/STATE.md) to Day 1 and shift the dates.
+
+**Assumed background:** comfortable in C#, comfortable with git, zero Unity. If you're new to programming, the pacing will be brutal — the briefs skip every language concept on purpose.
+
+**It is opinionated on purpose.** Engine-agnostic core from Day 22, the new Input System, URP, Cinemachine, no ScriptableObject-as-logic, no Addressables or DOTS. If you disagree with a call, the briefs are short enough to rewrite.
+
+## Licence
+
+MIT — see [LICENSE](LICENSE). Take it, fork it, teach with it.
+
+---
+
 *You have shipped software before. Games are software with a rendering budget and better feedback. You already have most of what you need.*
 
 **Day 1 is [here](milestones/M00-ground-zero.md).**
