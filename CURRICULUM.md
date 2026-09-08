@@ -18,7 +18,7 @@ Six content days, then a buffer day. Every milestone. The buffer day is not opti
 
 ## Phase 1 — Throwaway (Days 1–14)
 
-### M00 · Ground Zero — The Editor
+### [M00 · Ground Zero — The Editor](milestones/M00-ground-zero.md)
 **Days 1–7 · 10–16 Sep · project: `Sandbox00`**
 *You end holding: a physics toy you built and exported, and an editor that no longer intimidates you.*
 
@@ -32,7 +32,7 @@ Six content days, then a buffer day. Every milestone. The buffer day is not opti
 | 6 | Tue 15 Sep | Build the toy — knock a tower down, then export your first `.exe` |
 | 7 | Wed 16 Sep | **BUFFER** |
 
-### M01 · First Blood — A Complete Tiny Game
+### [M01 · First Blood — A Complete Tiny Game](milestones/M01-first-blood.md)
 **Days 8–14 · 17–23 Sep · project: `ChickenChase`**
 *You end holding: a finished, built, playable game. Small, silly, and complete — which is more than most people who "learn Unity" ever get.*
 
@@ -52,7 +52,7 @@ Six content days, then a buffer day. Every milestone. The buffer day is not opti
 
 Project: **`Hearthfall`**. Everything from here compounds. Nothing gets thrown away.
 
-### M02 · Movement & Feel
+### [M02 · Movement & Feel](milestones/M02-movement-and-feel.md)
 **Days 15–21 · 24–30 Sep**
 *You end holding: your peasant, walking around your village, with a camera that behaves.*
 
@@ -66,7 +66,7 @@ Project: **`Hearthfall`**. Everything from here compounds. Nothing gets thrown a
 | 20 | Tue 29 Sep | Cinemachine — a camera that follows without making you seasick |
 | 21 | Wed 30 Sep | **BUFFER** |
 
-### M03 · The Core — Engine-Agnostic Game Logic
+### [M03 · The Core — Engine-Agnostic Game Logic](milestones/M03-the-core.md)
 **Days 22–28 · 1–7 Oct**
 *You end holding: a `Hearthfall.Core` assembly with zero `using UnityEngine`, under test. **This milestone is why the 3D half fits in six weeks.***
 
@@ -80,7 +80,7 @@ Project: **`Hearthfall`**. Everything from here compounds. Nothing gets thrown a
 | 27 | Tue 6 Oct | ScriptableObjects as *content*, never as logic — and where the line is |
 | 28 | Wed 7 Oct | **BUFFER** |
 
-### M04 · Dialogue
+### [M04 · Dialogue](milestones/M04-dialogue.md)
 **Days 29–35 · 8–14 Oct**
 *You end holding: walk up to an NPC, press E, and have a conversation with portraits and typewriter text.*
 
@@ -94,7 +94,7 @@ Project: **`Hearthfall`**. Everything from here compounds. Nothing gets thrown a
 | 34 | Tue 13 Oct | Interactables — proximity, prompts, and talking to Osric for the first time |
 | 35 | Wed 14 Oct | **BUFFER** |
 
-### M05 · Choice & Consequence — *the pillar*
+### [M05 · Choice & Consequence — *the pillar*](milestones/M05-choice-and-consequence.md)
 **Days 36–42 · 15–21 Oct**
 *You end holding: choices that branch, conditions that gate, and consequences that arrive three scenes later.*
 
@@ -108,7 +108,7 @@ Project: **`Hearthfall`**. Everything from here compounds. Nothing gets thrown a
 | 41 | Tue 20 Oct | Automated playthroughs — walking every branch in a unit test |
 | 42 | Wed 21 Oct | **BUFFER** |
 
-### M06 · Quests & Journal
+### [M06 · Quests & Journal](milestones/M06-quests-and-journal.md)
 **Days 43–49 · 22–28 Oct**
 *You end holding: Act I, playable start to finish, with a journal that tracks it.*
 
@@ -122,7 +122,7 @@ Project: **`Hearthfall`**. Everything from here compounds. Nothing gets thrown a
 | 48 | Tue 27 Oct | Playtest Act I end to end. Write the bug list. Fix the top three. |
 | 49 | Wed 28 Oct | **BUFFER** |
 
-### M07 · Combat, 2D Edition
+### [M07 · Combat, 2D Edition](milestones/M07-combat-2d.md)
 **Days 50–56 · 29 Oct – 4 Nov**
 *You end holding: an attack that connects, a dodge that saves you, and an enemy that fights back.*
 
@@ -136,7 +136,7 @@ Project: **`Hearthfall`**. Everything from here compounds. Nothing gets thrown a
 | 55 | Tue 3 Nov | Hit feel: hitstop, knockback, flash, sound. The 20% that is 80% of combat. |
 | 56 | Wed 4 Nov | **BUFFER** |
 
-### M08 · Save/Load & The Game Shell
+### [M08 · Save/Load & The Game Shell](milestones/M08-save-and-shell.md)
 **Days 57–63 · 5–11 Nov**
 *You end holding: a game you can quit and come back to, with a menu, a pause screen, and three endings wired to the ledgers.*
 
@@ -150,7 +150,7 @@ Project: **`Hearthfall`**. Everything from here compounds. Nothing gets thrown a
 | 62 | Tue 10 Nov | Writing the three epilogues — and making B land without a score screen |
 | 63 | Wed 11 Nov | **BUFFER** |
 
-### M09 · Ship the 2D Slice
+### [M09 · Ship the 2D Slice](milestones/M09-ship-the-2d-slice.md)
 **Days 64–70 · 12–18 Nov**
 *You end holding: **a published game with a URL.** Mid-point win. This is the day the whole thing stops being a tutorial.*
 
@@ -170,7 +170,7 @@ Project: **`Hearthfall`**. Everything from here compounds. Nothing gets thrown a
 
 Same `Hearthfall.Core`. New everything else.
 
-### M10 · Into 3D — New View, Same Core
+### [M10 · Into 3D — New View, Same Core](milestones/M10-into-3d.md)
 **Days 71–77 · 19–25 Nov**
 *You end holding: a 3D scene running your dialogue system off code you did not modify. The moment M03 pays for itself.*
 
@@ -184,7 +184,7 @@ Same `Hearthfall.Core`. New everything else.
 | 76 | Tue 24 Nov | Interaction in 3D — raycasts, triggers, and "what am I looking at?" |
 | 77 | Wed 25 Nov | **BUFFER** |
 
-### M11 · Characters & Animation
+### [M11 · Characters & Animation](milestones/M11-characters-and-animation.md)
 **Days 78–84 · 26 Nov – 2 Dec**
 *You end holding: a character that walks, runs, idles, and turns — and NPCs that don't look dead.*
 
@@ -198,7 +198,7 @@ Same `Hearthfall.Core`. New everything else.
 | 83 | Tue 1 Dec | NPCs: idles, look-at, and standing somewhere believable |
 | 84 | Wed 2 Dec | **BUFFER** |
 
-### M12 · 3D Combat — Witcher-lite
+### [M12 · 3D Combat — Witcher-lite](milestones/M12-3d-combat.md)
 **Days 85–91 · 3–9 Dec**
 *You end holding: light, heavy, dodge, stamina, lock-on, and three enemies who make you use all of it.*
 
@@ -212,7 +212,7 @@ Same `Hearthfall.Core`. New everything else.
 | 90 | Tue 8 Dec | Hit reactions, VFX, hitstop, camera shake. Make it *hurt*. |
 | 91 | Wed 9 Dec | **BUFFER** |
 
-### M13 · World Building & Art Direction
+### [M13 · World Building & Art Direction](milestones/M13-world-and-art-direction.md)
 **Days 92–98 · 10–16 Dec**
 *You end holding: three locations that read as one coherent, gritty world — built from free assets, unified by light.*
 
@@ -226,7 +226,7 @@ Same `Hearthfall.Core`. New everything else.
 | 97 | Tue 15 Dec | Ambience and audio-visual coherence · dressing Hearthfall for Act III |
 | 98 | Wed 16 Dec | **BUFFER** |
 
-### M14 · Narrative in 3D + Kokoro VO
+### [M14 · Narrative in 3D + Kokoro VO](milestones/M14-narrative-in-3d.md)
 **Days 99–105 · 17–23 Dec**
 *You end holding: conversations that are framed like a film, voiced, with the three endings staged.*
 
@@ -240,7 +240,7 @@ Same `Hearthfall.Core`. New everything else.
 | 104 | Tue 22 Dec | Acts I and II wired end to end |
 | 105 | Wed 23 Dec | **BUFFER** |
 
-### M15 · Polish, Optimise, Ship
+### [M15 · Polish, Optimise, Ship](milestones/M15-polish-and-ship.md)
 **Days 106–112 · 24–30 Dec**
 *You end holding: a released 3D action-RPG with your name on it.*
 
