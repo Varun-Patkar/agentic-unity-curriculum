@@ -3,26 +3,28 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 1
-date_of_day_1: 2026-09-10
-last_session: null
+day: 2
+date_of_day_1: 2026-09-09
+last_session: 2026-09-09
 days_missed_total: 0
-projected_end: 2026-12-30
+projected_end: 2026-12-29
 
 milestone: M00
 milestone_title: Ground Zero — The Editor
-milestone_day: 1        # 1-6 = content, 7 = buffer
+milestone_day: 2        # 1-6 = content, 7 = buffer
 
-active_project: null    # set on Day 1 -> D:\Projects\Unity Games\Sandbox00
-unity_version: null     # record the exact version on Day 1
-render_pipeline: null   # URP from M02 onward
+active_project: D:\Projects\Unity Games\Sandbox00
+unity_version: 6000.6.0f1
+render_pipeline: URP
 
-status: not_started
+status: ready
 ```
 
 ## What exists
 
-*Nothing yet. Day 1 changes that.*
+- `Sandbox00` Universal 3D project opens without Console errors.
+- `SampleScene` contains a cube and is saved under `Assets/Scenes/`.
+- Play Mode tint is set and Windows Build Support is installed.
 
 ## What is broken
 
@@ -36,7 +38,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 1** — install check, create the first sandbox project, and learn the six windows that make up the Unity editor. Open `milestones/M00-ground-zero.md`.
+**Day 2** — build a multi-part cart and learn GameObjects, Components, Transforms, Tags, and Layers. Open `milestones/M00-ground-zero.md`.
 
 ---
 

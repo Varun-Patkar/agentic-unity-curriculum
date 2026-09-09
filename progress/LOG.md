@@ -31,3 +31,12 @@ Took it. Streak intact.
 ## Sessions
 
 <!-- Newest entries go at the BOTTOM. Append, never prepend. -->
+
+### Day 1 — 2026-09-09 — M00 — Install audit and the Unity editor
+
+**Built:** Created `Sandbox00` in Unity 6.6, toured the six editor windows, navigated the Scene view, set a Play Mode tint, moved a cube, and saved `SampleScene`.
+**Broke:** Nothing. Deliberately changed the cube during Play Mode and watched Unity discard the change.
+**Learned:** Play Mode runs temporary scene state; use it to inspect and tune, then make persistent edits outside it.
+**Criteria:** 6/6 passed
+**Commit:** `docs: day 1, unity version and project path recorded`
+**Felt:** Interactive and companionable; better than consuming a block of content and taking a quiz afterward.
