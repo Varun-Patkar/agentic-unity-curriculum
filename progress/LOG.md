@@ -40,3 +40,12 @@ Took it. Streak intact.
 **Criteria:** 6/6 passed
 **Commit:** `docs: day 1, unity version and project path recorded`
 **Felt:** Interactive and companionable; better than consuming a block of content and taking a quiz afterward.
+
+### Day 2 — 2026-09-10 — M00 — GameObjects, Components, Transforms
+
+**Built:** Composed a cart from a parent, bed, and two wheels; moved it through its parent Transform; duplicated and independently reshaped a second cart; added a ground plane; and assigned `Interactable` and `Ground` classifications.
+**Broke:** Nothing. The cart remained deliberately static; movement and input are not part of Day 2.
+**Learned:** A GameObject is a scene identity and component container; components add capabilities, while parent Transforms define a shared local coordinate space.
+**Criteria:** 5/5 passed
+**Commit:** `docs: day 2 log`
+**Felt:** Great and interactive, though I hoped to drive the cart; I understand that comes later.

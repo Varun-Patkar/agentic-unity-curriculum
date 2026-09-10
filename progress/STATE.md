@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 2
+day: 3
 date_of_day_1: 2026-09-09
-last_session: 2026-09-09
+last_session: 2026-09-10
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M00
 milestone_title: Ground Zero — The Editor
-milestone_day: 2        # 1-6 = content, 7 = buffer
+milestone_day: 3        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Sandbox00
 unity_version: 6000.6.0f1
@@ -25,6 +25,8 @@ status: ready
 - `Sandbox00` Universal 3D project opens without Console errors.
 - `SampleScene` contains a cube and is saved under `Assets/Scenes/`.
 - Play Mode tint is set and Windows Build Support is installed.
+- `SampleScene` contains two independently editable carts, each composed from a parent, bed, and two wheel children.
+- A ground plane uses the `Ground` layer, and the original cart uses the `Interactable` tag.
 
 ## What is broken
 
@@ -38,7 +40,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 2** — build a multi-part cart and learn GameObjects, Components, Transforms, Tags, and Layers. Open `milestones/M00-ground-zero.md`.
+**Day 3** — write `Spinner.cs` and make an object rotate and respond to the Space key while learning the MonoBehaviour lifecycle. Open `milestones/M00-ground-zero.md` and `reference/csharp-for-unity.md`.
 
 ---
 
