@@ -49,3 +49,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `docs: day 2 log`
 **Felt:** Great and interactive, though I hoped to drive the cart; I understand that comes later.
+
+### Day 3 — 2026-09-11 — M00 — Your first script and the MonoBehaviour lifecycle
+
+**Built:** Created `Spinner` with an Inspector-controlled rotation speed, proved the startup callback order on two objects, compared frame-independent and frame-dependent rotation, and made Space pause and resume spinning.
+**Broke:** Legacy `Input.GetKeyDown` threw an `InvalidOperationException` because the project used the new Input System exclusively; changed Active Input Handling to Both for today's legacy-input exercise.
+**Learned:** Unity owns the loop and invokes exact-name callbacks; `Awake` runs once per component lifetime, `OnEnable` runs for each active period, and per-frame movement needs `Time.deltaTime`.
+**Criteria:** 5/5 passed
+**Commit:** `docs: day 3 log`
+**Felt:** Fun; getting to make input visibly change something felt good.

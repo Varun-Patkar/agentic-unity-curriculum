@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 3
+day: 4
 date_of_day_1: 2026-09-09
-last_session: 2026-09-10
+last_session: 2026-09-11
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M00
 milestone_title: Ground Zero — The Editor
-milestone_day: 3        # 1-6 = content, 7 = buffer
+milestone_day: 4        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Sandbox00
 unity_version: 6000.6.0f1
@@ -27,6 +27,8 @@ status: ready
 - Play Mode tint is set and Windows Build Support is installed.
 - `SampleScene` contains two independently editable carts, each composed from a parent, bed, and two wheel children.
 - A ground plane uses the `Ground` layer, and the original cart uses the `Interactable` tag.
+- `Spinner` rotates a cube at an Inspector-set speed and toggles on Space; a second component demonstrates frame-dependent movement.
+- Lifecycle logs on two objects prove `Awake`/`OnEnable`/`Start`/first-`Update` ordering, and Active Input Handling is set to Both for the Day 3 legacy-input exercise.
 
 ## What is broken
 
@@ -40,7 +42,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 3** — write `Spinner.cs` and make an object rotate and respond to the Space key while learning the MonoBehaviour lifecycle. Open `milestones/M00-ground-zero.md` and `reference/csharp-for-unity.md`.
+**Day 4** — turn the spinning cube into a prefab, explore asset-versus-instance edits and overrides, then write a spawner that instantiates multiple copies.
 
 ---
 
