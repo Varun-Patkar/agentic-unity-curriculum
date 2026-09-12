@@ -58,3 +58,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `docs: day 3 log`
 **Felt:** Fun; getting to make input visibly change something felt good.
+
+### Day 4 — 2026-09-12 — M00 — Prefabs, instantiation, and the Project window
+
+**Built:** Turned the spinning cube into a coloured prefab, proved asset propagation and instance overrides, spawned 50 copies at random positions through an Inspector-assigned prefab, and organised project assets under `_Project` without breaking references.
+**Broke:** Nothing. The existing Day 2 carts and Day 3 comparison objects were removed after they had served their purpose.
+**Learned:** Prefab assets are serialized templates; instances inherit asset changes except where a property has an explicit override, while `.meta` GUIDs preserve references when assets move.
+**Criteria:** 5/5 passed
+**Commit:** `docs: day 4 log`
+**Felt:** Fifty synchronized red cubes felt a bit like the spinning cat meme.
