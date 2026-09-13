@@ -67,3 +67,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `docs: day 4 log`
 **Felt:** Fifty synchronized red cubes felt a bit like the spinning cat meme.
+
+### Day 5 — 2026-09-13 — M00 — Physics: Rigidbody, colliders, and the FixedUpdate rule
+
+**Built:** Stacked a stable 15-box Rigidbody wall, launched a ball through it with an impulse applied in `FixedUpdate`, detected the ball through a trigger zone, and added a bouncy low-friction Physics Material.
+**Broke:** Deliberately teleported the ball through the wall by changing its Transform, then disabled `Is Trigger` and watched the trigger become a solid invisible barrier; restored Rigidbody movement and trigger behavior afterward.
+**Learned:** A Rigidbody gives physics ownership of movement; input belongs in `Update`, physics actions belong in `FixedUpdate`, and collision or trigger interaction requires a Rigidbody on at least one participating object.
+**Criteria:** 5/5 passed
+**Commit:** `docs: day 5 log`
+**Felt:** Functionally similar to a game, though currently an 80s bowling game.

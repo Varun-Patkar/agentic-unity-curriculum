@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 5
+day: 6
 date_of_day_1: 2026-09-09
-last_session: 2026-09-12
+last_session: 2026-09-13
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M00
 milestone_title: Ground Zero — The Editor
-milestone_day: 5        # 1-6 = content, 7 = buffer
+milestone_day: 6        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Sandbox00
 unity_version: 6000.6.0f1
@@ -31,6 +31,9 @@ status: ready
 - `SpinnerCube` is a coloured prefab whose asset changes propagate to scene and runtime instances; instance overrides can be identified and reverted.
 - `Spawner` creates 50 spinning prefab instances at random positions from an Inspector-assigned reference.
 - Project-owned scenes, scripts, prefabs, and materials are organised under `Assets/_Project/` without broken references.
+- A stable 15-box Rigidbody wall collapses when struck by a physics-launched ball.
+- `Launcher` captures input in `Update` and applies an impulse in `FixedUpdate`.
+- `LaunchTrigger` reports entering objects without blocking them, and `BouncyBall` gives the projectile low-friction, high-bounce contact behavior.
 
 ## What is broken
 
@@ -44,7 +47,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 5** — build a Rigidbody box tower, launch a ball into it through physics, and create a trigger zone that reports entries.
+**Day 6** — turn the milestone exercises into a small toy, then make a Windows build.
 
 ---
 
