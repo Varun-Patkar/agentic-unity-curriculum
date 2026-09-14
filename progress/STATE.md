@@ -3,17 +3,17 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 7
+day: 8
 date_of_day_1: 2026-09-09
 last_session: 2026-09-14
 days_missed_total: 0
 projected_end: 2026-12-29
 
-milestone: M00
-milestone_title: Ground Zero — The Editor
-milestone_day: 7        # 1-6 = content, 7 = buffer
+milestone: M01
+milestone_title: First Blood — A Complete Tiny Game
+milestone_day: 1        # 1-6 = content, 7 = buffer
 
-active_project: D:\Projects\Unity Games\Sandbox00
+active_project: D:\Projects\Unity Games\ChickenChase
 unity_version: 6000.6.0f1
 render_pipeline: URP
 
@@ -37,6 +37,9 @@ status: ready
 - The bowling toy aims from the mouse through a red trajectory line and launches on left click.
 - Fallen boxes score once, turn red, and reset with the full scene when R is pressed; an out-of-bounds ball reports the loss and restart instruction.
 - A 1280×720 windowed Windows build runs from `Builds/v1/` with Unity closed, and the complete build folder is zipped for distribution.
+- A resolution-aware HUD shows current and persistent best scores, with a working Reset Best button on terminal screens.
+- A full-platform out-of-bounds trigger shows Game Over, while knocking down all 15 boxes shows You Win; R starts a clean run.
+- M00 exit check passed: opening Unity and building a small scene now feels easy.
 
 ## What is broken
 
@@ -46,11 +49,11 @@ status: ready
 
 Things noticed but deliberately deferred. Revisit on buffer days.
 
-- Visible in-game score and loss text are deferred to the Day 11 UI lesson; Day 6 uses Console logging as specified.
+*Nothing.*
 
 ## Next action
 
-**Day 7 buffer** — choose catch up, polish, explore, or rest; do not start M01 material.
+**Day 8** — create `ChickenChase` from the Universal 2D template, initialise Git with a Unity `.gitignore`, and import the first deliberately configured sprites.
 
 ---
 

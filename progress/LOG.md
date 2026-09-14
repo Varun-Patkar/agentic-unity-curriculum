@@ -85,3 +85,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `docs: day 6 log — first build shipped`
 **Felt:** Mouse control and the overview camera made it feel like a pretty good game.
+
+### Day 7 — 2026-09-14 — BUFFER — polish
+
+**Built:** Added a resolution-aware Canvas HUD with current and persistent best scores, a Reset Best button, separate game-over and victory overlays, and a full-platform out-of-bounds trigger. R reloads into a clean run, losses remain losses after a previous win, and knocking down all 15 boxes ends in victory.
+**Broke:** The scoreboard initially rendered partly off-screen because its pivot remained centred; fixed the top-left pivot. The loaded high score initially shadowed the controller field, and the first out-of-bounds trigger was too small for the ground's doubled scale; fixed the assignment and expanded the catch volume.
+**Learned:** Canvas anchors and pivots control responsive placement, UI event callbacks reference live scene components rather than script assets, and `PlayerPrefs` is sufficient for one disposable persistent integer but not a real save system.
+**Criteria:** 5/5 passed
+**Commit:** `docs: M00 complete — editor fundamentals`
+**Felt:** Good enough for today; opening Unity and building a small scene now feels easy.
