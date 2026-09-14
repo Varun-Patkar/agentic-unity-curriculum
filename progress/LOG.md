@@ -76,3 +76,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `docs: day 5 log`
 **Felt:** Functionally similar to a game, though currently an 80s bowling game.
+
+### Day 6 — 2026-09-14 — M00 — Build the toy, then export a real executable
+
+**Built:** Turned the physics exercise into a mouse-aimed bowling toy with a red trajectory line, click-to-launch input, permanent fallen-box scoring and recolouring, an out-of-bounds loss state, R-to-restart scene reload, and a stable overview camera. Built, tested with Unity closed, and zipped a 1280×720 windowed Windows release.
+**Broke:** The trajectory initially reused Line Renderer endpoint index 0 and rendered pink with an incompatible material; assigned endpoint index 1 correctly and switched the material to a URP-compatible shader.
+**Learned:** A camera ray can intersect an invisible mathematical plane to turn a screen-space cursor into a world-space aim direction; a build is a separate deployed program whose executable depends on its adjacent data files.
+**Criteria:** 5/5 passed
+**Commit:** `docs: day 6 log — first build shipped`
+**Felt:** Mouse control and the overview camera made it feel like a pretty good game.

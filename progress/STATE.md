@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 6
+day: 7
 date_of_day_1: 2026-09-09
-last_session: 2026-09-13
+last_session: 2026-09-14
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M00
 milestone_title: Ground Zero — The Editor
-milestone_day: 6        # 1-6 = content, 7 = buffer
+milestone_day: 7        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Sandbox00
 unity_version: 6000.6.0f1
@@ -34,6 +34,9 @@ status: ready
 - A stable 15-box Rigidbody wall collapses when struck by a physics-launched ball.
 - `Launcher` captures input in `Update` and applies an impulse in `FixedUpdate`.
 - `LaunchTrigger` reports entering objects without blocking them, and `BouncyBall` gives the projectile low-friction, high-bounce contact behavior.
+- The bowling toy aims from the mouse through a red trajectory line and launches on left click.
+- Fallen boxes score once, turn red, and reset with the full scene when R is pressed; an out-of-bounds ball reports the loss and restart instruction.
+- A 1280×720 windowed Windows build runs from `Builds/v1/` with Unity closed, and the complete build folder is zipped for distribution.
 
 ## What is broken
 
@@ -43,11 +46,11 @@ status: ready
 
 Things noticed but deliberately deferred. Revisit on buffer days.
 
-*Empty.*
+- Visible in-game score and loss text are deferred to the Day 11 UI lesson; Day 6 uses Console logging as specified.
 
 ## Next action
 
-**Day 6** — turn the milestone exercises into a small toy, then make a Windows build.
+**Day 7 buffer** — choose catch up, polish, explore, or rest; do not start M01 material.
 
 ---
 
