@@ -94,3 +94,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `docs: M00 complete — editor fundamentals`
 **Felt:** Good enough for today; opening Unity and building a small scene now feels easy.
+
+### Day 8 — 2026-09-15 — M01 — 2D URP project, sprites, and the 2D pipeline
+
+**Built:** Created the Universal 2D `ChickenChase` project with a Unity-aware Git boundary, organised a `Game` scene under `_Project`, imported a peasant and three chickens at a consistent 16 PPU, extracted a fully opaque grass tile, framed the playfield with an orthographic camera, added sorting layers, and fitted every entity with a `BoxCollider2D`.
+**Broke:** The first grass choices were transition tiles with transparent edges. After replacing them, the peasant still rendered far from its Transform because its custom pivot Y was accidentally set to 9 instead of 0; correcting the normalized bottom-centre pivot fixed it.
+**Learned:** PPU controls world size, the pivot controls where sprite pixels sit relative to the Transform, and Sorting Layers control 2D draw order independently of physics Layers, Hierarchy order, and Z position.
+**Criteria:** 5/5 passed
+**Commit:** `46a1980` (`feat: 2d project setup with sprites and sorting layers`)
+**Felt:** Fiddly while choosing grass and diagnosing the pivot, but the visible failures made the 2D conventions concrete.

@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 8
+day: 9
 date_of_day_1: 2026-09-09
-last_session: 2026-09-14
+last_session: 2026-09-15
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M01
 milestone_title: First Blood — A Complete Tiny Game
-milestone_day: 1        # 1-6 = content, 7 = buffer
+milestone_day: 2        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\ChickenChase
 unity_version: 6000.6.0f1
@@ -40,6 +40,10 @@ status: ready
 - A resolution-aware HUD shows current and persistent best scores, with a working Reset Best button on terminal screens.
 - A full-platform out-of-bounds trigger shows Game Over, while knocking down all 15 boxes shows You Win; R starts a clean run.
 - M00 exit check passed: opening Unity and building a small scene now feels easy.
+- `ChickenChase` is a clean Universal 2D project with a Unity-aware `.gitignore` and tracked `.meta` files.
+- The `Game` scene has an intentionally framed orthographic playfield, a peasant, three chickens, and coherent 16 PPU pixel art.
+- `Background`, `Ground`, `Entities`, and `UI` Sorting Layers exist; entities render over the ground without relying on Z position.
+- Every entity has a `BoxCollider2D`, and Play Mode runs without Console errors.
 
 ## What is broken
 
@@ -49,11 +53,11 @@ status: ready
 
 Things noticed but deliberately deferred. Revisit on buffer days.
 
-*Nothing.*
+- [D8] Chicken collider bounds are generous; tune them when collection behavior arrives on Day 10.
 
 ## Next action
 
-**Day 8** — create `ChickenChase` from the Universal 2D template, initialise Git with a Unity `.gitignore`, and import the first deliberately configured sprites.
+**Day 9** — create the `PlayerControls` Input Actions asset and move the peasant with WASD through a `Rigidbody2D`.
 
 ---
 
