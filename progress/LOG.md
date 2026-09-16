@@ -112,3 +112,12 @@ Took it. Streak intact.
 **Criteria:** Story bible, curriculum, and milestone consistency checks passed; Day 9 remains current.
 **Commit:** `docs: retarget curriculum to Last Stop Hollowbrook`
 **Felt:** The project now sounds like the game I actually want to finish.
+
+### Day 9 — 2026-09-16 — M01 — The Input System, properly
+
+**Built:** Created a `PlayerControls` Input Actions asset with normalized WASD and gamepad left-stick bindings, then moved the peasant through a `Rigidbody2D` at a tuned speed of 5.
+**Broke:** Nothing. Solid chicken colliders block movement and the unbounded playfield allows leaving the screen; both are expected at this stage.
+**Learned:** Gameplay code reads the abstract `Move` intent while Unity continuously resolves the bound device input; input is sampled in `Update` and consumed by physics in `FixedUpdate`.
+**Criteria:** 5/5 passed; gamepad support was verified structurally because no controller was available.
+**Commit:** `c96e592` (`feat: input system driven player movement`)
+**Felt:** Cool to see Unity handle continuous input instead of manually moving something once per key press.

@@ -3,7 +3,7 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 9
+day: 10
 date_of_day_1: 2026-09-09
 last_session: 2026-09-16
 days_missed_total: 0
@@ -11,7 +11,7 @@ projected_end: 2026-12-29
 
 milestone: M01
 milestone_title: First Blood — A Complete Tiny Game
-milestone_day: 2        # 1-6 = content, 7 = buffer
+milestone_day: 3        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\ChickenChase
 unity_version: 6000.6.0f1
@@ -45,6 +45,7 @@ status: ready
 - `Background`, `Ground`, `Entities`, and `UI` Sorting Layers exist; entities render over the ground without relying on Z position.
 - Every entity has a `BoxCollider2D`, and Play Mode runs without Console errors.
 - The post-M01 curriculum now targets *Last Stop, Hollowbrook*: a modern supernatural choice RPG with two full-story endings, one first-playthrough dialogue-skip ending, and deliberately simple combat.
+- The peasant moves smoothly at speed 5 through a `Rigidbody2D`, using one `Move` action bound to normalized WASD and the gamepad left stick with no legacy input calls.
 
 ## What is broken
 
@@ -58,7 +59,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 9** — create the `PlayerControls` Input Actions asset and move the peasant with WASD through a `Rigidbody2D`.
+**Day 10** — turn chickens into collectible triggers, spawn them at varied positions, and add score and timer state through events.
 
 ---
 
