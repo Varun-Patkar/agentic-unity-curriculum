@@ -1,6 +1,6 @@
 # M09 · Ship the 2D Slice
 
-**Days 64–70 · 12–18 Nov 2026 · project: `Hearthfall`**
+**Days 64–70 · 12–18 Nov 2026 · project: `Hollowbrook`**
 
 > Most people who set out to learn Unity never ship anything. They accumulate systems, get bored, and start a new project with better architecture. You are seven days from not being one of them.
 >
@@ -32,16 +32,18 @@
 3. Write a validator in Core: walk every dialogue graph and assert that every node either has choices or terminates, that every choice target exists, and that every referenced flag is set somewhere. Run it as a test.
 4. Fix everything it finds. This will be more than you expect and it's the highest-value 15 minutes of the week.
 5. Same treatment for quests: every quest must be completable *and* failable from a real path, and the journal must render both.
-6. Verify all three endings are reachable. Force each ledger state in a test and confirm the gate picks the right one.
-7. Run the full `PlaythroughDriver` suite from Day 41. Add a driver run per ending if you don't have one.
+6. Verify **exactly three** endings are reachable: `MorningInHollowbrook`, `NewKeeper`, and first-run-only `JustPassingThrough`. Assert there is no fourth ID or fallback.
+7. Run the full `PlaythroughDriver` suite from Day 41, with one complete driver run per ending. The skip run must use five valid reveal-state early advances; add negative tests for Instant reveal and completed profile history.
 8. Anything still unshippable at 50 minutes goes into the *cut* bucket. Not *defer*. **Cut.**
+9. Audit combat content: one creature archetype, two data variants, one player attack, one dodge. Delete accidental extra enemies or combat systems.
 
 ### Acceptance criteria
 - [ ] `SCOPE.md` exists; every TODO is bucketed as blocker / cut / defer
 - [ ] Cut content is deleted, including everything referencing it
 - [ ] The dialogue validator runs as a test and passes
 - [ ] No dialogue node dead-ends; no choice points at a missing node
-- [ ] All three endings reachable and verified by tests
+- [ ] Exactly three endings reachable and verified by tests, including the skip ending
+- [ ] One creature archetype only, with two data variants
 - [ ] Full `PlaythroughDriver` suite green
 
 ### Failure modes
@@ -66,7 +68,7 @@
 - **An `AudioMixer` is a routing graph with exposed parameters.** Groups: Master → Music, SFX, UI. Your Day 60 settings sliders have been controlling nothing until now; today they get something.
 - **Volume sliders are logarithmic.** `SetFloat(param, Mathf.Log10(v) * 20f)` with a guard for zero. A linear slider on a dB parameter feels dead for the top 80% and then falls off a cliff.
 - **Music must not restart on scene load.** One persistent audio object, crossfade on transitions. This is the most-noticed audio bug in student projects.
-- **Ambience is a loop, not an event.** Wind in the valley, room tone in the counting-house. Quiet enough that the player doesn't notice it until you mute it.
+- **Ambience is a loop, not an event.** Traffic and diner ventilation in Town Square, insects and trees on Old Mine Road, drips and low resonance in Mercer Mine. Quiet enough that the player doesn't notice it until you mute it.
 - **UI sound is what makes menus feel responsive.** Hover, click, back, open, close. Five short sounds, and the whole shell stops feeling like a prototype.
 - **Mix at low volume.** If it sounds good quiet, it sounds good loud. The reverse is never true.
 
@@ -74,8 +76,8 @@
 1. Create an `AudioMixer` (`Window > Audio > Audio Mixer` — verify this path in Unity 6). Add Music, SFX, and UI groups under Master. Expose each group's volume parameter and rename them clearly.
 2. Route every `AudioSource` in the project to the correct group. Any source not on a group is a bug.
 3. Wire the settings sliders to `AudioMixer.SetFloat` with the log conversion, and persist the values with the rest of your settings.
-4. `MusicManager` — persistent across scenes, `Play(track, fadeSeconds)`, crossfades, never restarts the same track. One track for Hearthfall, one for Vaskirk, silence for the ending.
-5. Ambience loops per location, started by the location transition, faded rather than cut.
+4. `MusicManager` — persistent across scenes, `Play(track, fadeSeconds)`, crossfades, never restarts the same track. A restrained Town Square theme, tension for Old Mine Road/Mercer Mine, and deliberate ending cues.
+5. Ambience loops for Town Square, Old Mine Road, and Mercer Mine, started by location transition and faded rather than cut.
 6. UI sounds on hover, click, back, journal open/close, dialogue advance. Pitch-vary the dialogue blip or it becomes a woodpecker.
 7. Source from Freesound, Kenney, Incompetech. **Add every single one to `ATTRIBUTIONS.md` as you import it**, not on Day 69.
 8. Play Act I end to end with headphones. Balance until nothing makes you flinch and nothing disappears.
@@ -119,15 +121,15 @@
 1. Lock the palette. Build it as a small PNG in `Assets/_Project/Art/palette.png` and commit it. Every future asset gets quantised to this file.
 2. Audit what exists: list every sprite, tile, portrait, and UI element, and mark each *fine* / *fix* / *replace*. Ten minutes, no more.
 3. Fix the top five by visibility. The player looks at the character, the dialogue box, the portraits, the tileset, and the title screen. In that order.
-4. Portraits for Osric, Enid, and Vance minimum, through the one prompt skeleton, downscaled, cleaned, quantised, and run through the same colour grade.
+4. Portraits for Alex Reed, Eli Reed, Mayor Vale, Deputy Pike, Mara Bell, and June Mercer through one prompt skeleton, downscaled, cleaned, quantised, and run through the same colour grade. The Guest Below may remain an obscured environmental presence.
 5. Quantise every existing sprite to the palette — Krita's colour-to-alpha and index-mode conversion, or an Aseprite palette apply. Bulk operation, not per-sprite art.
 6. One title-screen image. This is the thumbnail on your itch.io page and it does more work than any in-game asset.
-7. Add a URP 2D global light and one warm point light in the village if you haven't. Lighting does more for coherence than redrawing anything.
+7. Add a URP 2D global light and location-specific accents: civic warmth in Town Square, sparse road lighting, and unnatural mine light. Lighting does more for coherence than redrawing anything.
 8. **Stop at 50 minutes.** Whatever isn't done stays placeholder and ships that way.
 
 ### Acceptance criteria
 - [ ] A committed palette file, and everything visible quantised to it
-- [ ] Three portraits minimum, visibly from the same hand
+- [ ] Hollowbrook's principal human cast has coherent portraits
 - [ ] Title screen art exists
 - [ ] The five highest-visibility assets are *fine*, not *fix*
 - [ ] `ATTRIBUTIONS.md` updated for anything downloaded
@@ -139,7 +141,7 @@
 - **Sprites changed size** → you edited resolution, not just colour. PPU is per-asset; don't fix it with Transform scale.
 - **Pixel art went blurry** → something got re-imported with Bilinear filtering.
 
-**Stretch:** One post-processing Volume with a subtle warm grade for the valley and a colder one for Vaskirk. Five minutes, and the two acts stop looking identical.
+**Stretch:** Use subtle grading to distinguish ordinary Town Square, uneasy Old Mine Road, and Mercer Mine without making them look like different games.
 
 **Commit:** `art: shared palette, portraits, and title screen`
 
@@ -164,7 +166,7 @@
 1. Fresh save, no editor. **Play the actual build if you have one** — or the editor from the main menu, never from mid-scene.
 2. Full playthrough, ~20 minutes, optimal route. Note as you go, in `PLAYTEST.md`, categorised, timestamped. Fix nothing.
 3. Second run, ~10 minutes: take every wrong turn, refuse every quest, talk to everyone twice, open the journal at every wrong moment.
-4. Third pass: drive straight for the ending you've tested least. Confirm it fires and reads correctly.
+4. Third pass: drive all three endings through focused saves or test scenarios. Confirm the skip ending works only on an eligible first profile and the two full endings resolve their authored decisions.
 5. Check the Console after every run. Warnings you've been ignoring for three weeks are now candidates.
 6. **Get one human to play it while you watch.** Housemate, partner, colleague on a call sharing their screen. Ten minutes is plenty. Say nothing.
 7. Write down every place they hesitated. Hesitation is the bug; what they said afterwards is commentary.
@@ -249,8 +251,8 @@
 - **Your page needs to survive eight seconds of attention.** Title, tagline, one screenshot. Everything else is for people already interested.
 
 ### Build (40 min)
-1. Player Settings: product name `Hearthfall`, company name, version `0.1.0`, an icon from your title art, default 1280×720 windowed.
-2. Build Profiles: confirm every scene is listed, MainMenu at index 0, nothing orphaned. Build to `Builds/Hearthfall-v0.1-win64/`.
+1. Player Settings: product name `Last Stop, Hollowbrook`, company name, version `0.1.0`, an icon from your title art, default 1280×720 windowed.
+2. Build Profiles: confirm every scene is listed, MainMenu at index 0, nothing orphaned. Build to `Builds/Hollowbrook-v0.1-win64/`.
 3. **Copy the build folder somewhere unrelated** — a temp directory, or a USB stick — and run it there. Play to an ending. This catches the missing-data-folder class of bug.
 4. Take 3–4 screenshots at 1920×1080: dialogue with a portrait, the journal, a choice moment, the village. No debug overlays, no editor chrome.
 5. Zip the build folder (the `.exe` and its `_Data` folder together, or it won't run).
@@ -309,11 +311,11 @@ Genuinely stop. The half-hour is not for adding anything.
 
 Seventy days in, roughly 62% through, and **you have shipped a game**. It is on the internet, it has a URL, and strangers can download it. That is not a tutorial outcome.
 
-Specifically: an engine-agnostic `Hearthfall.Core` with no `using UnityEngine` anywhere in it. Branching dialogue with portraits and typewriter text. Choices whose consequences arrive weeks later in a letter from your sister. Quests and a journal. Combat with stamina and a dodge. Save/load with slots. A full game shell — menu, pause, settings, all of it. Three endings, selected by ledgers the player never saw.
+Specifically: an engine-agnostic `Hollowbrook.Core` with no `using UnityEngine` anywhere in it. Branching dialogue with portraits, accessible typewriter text, and Mayor Vale's first-run patience system. Four central choices with delayed town reactions. `Where Is Eli?`, clues, and a journal. One improvised attack, one dodge, and one creature archetype with two variants. Save/load with decision and profile history. A full game shell. Exactly three endings, including the skip ending.
 
 Tomorrow you start the 3D half, and parts of it will feel like starting over. Cameras, lighting, animation, navigation, physics in three dimensions — all new, and some of it will be humbling after ten weeks of feeling competent.
 
-But `Hearthfall.Core` does not care what dimension it's rendered in. That was the whole point of M03. **Day 75 is the payoff**: a 3D scene, a camera behind a character's shoulder, and your dialogue system running — the same code, untouched, not one line changed. That's the day the architecture bill you've been paying since September pays out.
+But `Hollowbrook.Core` does not care what dimension it's rendered in. That was the whole point of M03. **Day 75 is the payoff**: a 3D scene, a camera behind Alex's shoulder, and your dialogue system running — the same code, untouched, not one line changed.
 
 ### Acceptance criteria
 - [ ] Final build produced from a clean state and verified on an unrelated path

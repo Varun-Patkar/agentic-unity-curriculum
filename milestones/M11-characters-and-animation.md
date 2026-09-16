@@ -1,6 +1,6 @@
 # M11 · Characters & Animation
 
-**Days 78–84 · 26 Nov – 2 Dec 2026 · project: `Hearthfall3D`**
+**Days 78–84 · 26 Nov – 2 Dec 2026 · project: `Hollowbrook3D`**
 
 > Animation is the single biggest lever on perceived quality in 3D. A capsule that slides is a prototype; a person who leans into a turn is a game — same code, same camera, same greybox. Nothing else you do this year buys as much for as little.
 >
@@ -13,7 +13,7 @@
 ## Day 78 — The Mixamo pipeline: rig, import, humanoid avatars, retargeting
 **Thu 26 Nov · 60 min**
 
-**Objective:** A rigged humanoid character in `Hearthfall3D`, playing a Mixamo idle, at the correct scale, not magenta.
+**Objective:** A modern civilian Alex Reed in `Hollowbrook3D`, playing a Mixamo idle, at the correct scale, not magenta.
 
 **Why:** Everything this week depends on having clips and a rig. Get the import pipeline right once today and the other six days are about behaviour rather than about fighting FBX.
 
@@ -26,17 +26,17 @@
 
 ### Build (40 min)
 1. **First: verify Mixamo.** Open mixamo.com, sign in with an Adobe ID, confirm auto-rigging and animation downloads still work and are still free. Adobe has signalled changes before and this plan is stale the moment they land. If it is gone or paywalled, stop and take the fallback ladder in `reference/asset-pipeline.md` — Unity's free **Starter Assets: Third Person** first, then Quaternius, Kenney, Rokoko/ActorCore free tiers, Blender+Rigify last. The rest of the week works identically on any Humanoid rig.
-2. Pick a character from Mixamo's library — do not upload a custom mesh today. Something plainly medieval-peasant-adjacent. Name it `Wat`.
-3. Download animations: **idle**, **walk**, **run**, **turn left/right**, plus two combat swings for M12. Format FBX for Unity, skin off for clips, 30fps. Grab idle/walk/run **in-place**, and the swings **with** root motion.
-4. Import into `Assets/Characters/Wat/`. On the mesh FBX: Inspector > **Rig** tab > Animation Type **Humanoid**, Avatar Definition *Create From This Model*, Apply.
+2. Pick a contemporary civilian character from Mixamo's library: ordinary jacket, shirt, jeans, and practical shoes rather than armour or period costume. This is Alex Reed, a practical person returning to a modern small town.
+3. Download **idle**, **walk**, **run**, and **turn left/right**, plus one improvised melee swing and one dodge for M12. Format FBX for Unity, skin off for clips, 30fps. Grab locomotion **in-place** and committed actions with usable root displacement.
+4. Import into `Assets/Characters/Alex/`. On the mesh FBX: Inspector > **Rig** tab > Animation Type **Humanoid**, Avatar Definition *Create From This Model*, Apply.
 5. Click **Configure...** and check the bone map. Green everywhere, T-pose sane. This window is the only place you will ever debug a bad rig.
 6. Fix scale on the **Model** tab if the character is 100 m tall. Convert materials: select them and use Unity 6's URP material upgrader — **verify the current menu path in the URP docs rather than trusting a remembered one**; it has moved between versions.
-7. Drop `Wat` in the scene next to your capsule. Add an `Animator`, assign a controller with the idle clip, press Play.
+7. Drop Alex in the scene next to your capsule. Add an `Animator`, assign a controller with the idle clip, press Play.
 8. **Prove retargeting:** import a second Mixamo character as Humanoid and play the *same* idle clip on it. If it works, you understand what Avatars are for.
 
 ### Acceptance criteria
 - [ ] Mixamo's current status verified and written into `progress/STATE.md`
-- [ ] `Wat` imported as **Humanoid** with a valid, green Avatar configuration
+- [ ] Alex imported as a modern civilian **Humanoid** with a valid, green Avatar configuration
 - [ ] Character stands ~1.8 m tall in the scene, no scaled transform
 - [ ] Materials render correctly in URP, not magenta
 - [ ] Idle plays in Play mode
@@ -59,7 +59,7 @@
 ## Day 79 — The Animator: states, transitions, parameters, and layers
 **Fri 27 Nov · 60 min**
 
-**Objective:** An Animator Controller that switches `Wat` between idle and walk because of your actual input, not because you clicked something.
+**Objective:** An Animator Controller that switches Alex between idle and walk because of actual input, not because you clicked something.
 
 **Why:** The Animator Controller is a state machine over clips. You have written a dozen state machines in your life — this one just has a graph editor bolted on and communicates over strings, which is where all the pain lives.
 
@@ -69,17 +69,17 @@
 - **Trigger vs Bool.** A Trigger is a Bool that auto-resets when consumed. Use Triggers for one-shot actions, Bools for sustained states. Mixing them up produces attacks that fire twice or never.
 - **Exit Time is a lie you tell yourself.** *Has Exit Time* means "wait until the current clip reaches X% before transitioning". Correct for locomotion loops. Catastrophic for a combat move — it is literally input lag with a checkbox. Turn it off for anything reactive.
 - **Transition Duration** cross-fades between clips. 0.1–0.25 s for locomotion, near-zero for attacks.
-- **Layers + Avatar Masks** let an upper-body animation play over lower-body locomotion. You will need this in M12 for swinging while walking. Know it exists; don't build it today.
+- **Layers + Avatar Masks** let a reaction play over locomotion. Know the tool exists, but keep Alex's one committed attack as a simple full-body action.
 
 ### Build (40 min)
-1. `Assets/Animation/WatLocomotion.controller`. Open the **Animator** window (Window > Animation > Animator — confirm the path in Unity 6 if it isn't where you expect).
+1. `Assets/Animation/AlexLocomotion.controller`. Open the **Animator** window (Window > Animation > Animator — confirm the path in Unity 6 if it isn't where you expect).
 2. Add a `Float` parameter `Speed` and a `Bool` `IsGrounded`.
 3. Two states: `Idle` (default, orange) and `Walk`. Assign the clips. Set both to Loop Time on the clip's import Inspector — Mixamo clips often import unlooped.
 4. Transitions both ways on `Speed > 0.1` and `Speed < 0.1`. Has Exit Time **off**, duration ~0.15 s.
 5. `Unity/Player/PlayerAnimationDriver.cs` — **you write it.** It reads the movement values your Day 73 controller already computes and pushes them into the Animator. It owns no gameplay logic; it is a one-way adapter, state → animation. Cache the parameter hashes.
 6. Wire it to the existing controller. The controller must not know the Animator exists; the driver reads from it.
 7. Play. Walk around. Watch the character transition.
-8. **The debugging move that matters:** with the game running, keep the Animator window open and select `Wat`. The active state glows and a progress bar shows playback. Nothing else tells you the truth this quickly.
+8. **The debugging move that matters:** with the game running, keep the Animator window open and select Alex. The active state glows and a progress bar shows playback.
 
 ### Acceptance criteria
 - [ ] Controller with `Idle` and `Walk`, both looping
@@ -95,7 +95,7 @@
 - **Animation stutters between two states** → your threshold has no hysteresis. Use `> 0.1` / `< 0.05`, not the same number both ways.
 - **Transition feels delayed** → Has Exit Time is on, or the duration is too long.
 
-**Stretch:** Add a second layer with an upper-body Avatar Mask and play a "carrying" idle over walking. Five minutes, and it's the M12 groundwork.
+**Stretch:** Add a second layer with an upper-body Avatar Mask and play a "carrying" idle over walking. This is NPC presentation work, not expanded combat groundwork.
 
 **Commit:** `feat: locomotion animator controller`
 
@@ -113,7 +113,7 @@
 - **Normalise your parameter.** Feed the tree `0..1`, not raw m/s. Then thresholds are meaningful and swapping a clip doesn't require retuning. Idle at 0, walk at ~0.5, run at 1.
 - **Ice-skating is a units mismatch.** The walk clip was authored at some real-world speed. If you move the `CharacterController` faster than the clip's feet cycle, the feet slide. Two honest fixes: **(a)** set `Animator.speed` (or a per-clip multiplier) so playback matches actual ground speed, or **(b)** drive movement from the animation via root motion. Pick (a) for now; Day 81 covers (b).
 - **Damp the parameter.** Snapping `Speed` from 0 to 1 in one frame makes a character teleport into a sprint. `SetFloat(hash, target, dampTime, Time.deltaTime)` has damping built in — ~0.1 s is a good start.
-- **2D blend trees** take two parameters — forward and strafe — and blend eight directional clips. You need this for lock-on strafing in M12. Build the 1D version today and know the 2D one is a superset.
+- **2D blend trees** suit games with directional strafing. Hollowbrook does not need that mode; the 1D tree is enough for free movement and automatic pre-attack facing.
 - **Compute speed on the horizontal plane.** Include Y and gravity makes you "run" while falling.
 
 ### Build (40 min)
@@ -141,7 +141,7 @@
 - **Speed spikes when falling** → you included the Y component.
 - **Everything is mush** → damp time too high. 0.1 s, not 0.5.
 
-**Stretch:** Convert to a 2D Freeform Directional tree with forward/strafe now, while the context is loaded. M12 will want it and it's cheaper today than in three weeks.
+**Stretch:** Add a turn-in-place parameter if Alex's direction changes still pop at low speed.
 
 **Commit:** `feat: locomotion blend tree`
 
@@ -150,7 +150,7 @@
 ## Day 81 — Root motion vs in-place: what each is for, and when each ruins your day
 **Sun 29 Nov · 60 min**
 
-**Objective:** A written, deliberate policy — in-place locomotion, root-motion attacks — implemented and proven with one root-motion clip.
+**Objective:** A written policy — in-place locomotion, committed-action root motion — proven with the single improvised attack clip.
 
 **Why:** This is the decision that quietly determines how the rest of your 3D game feels. Getting it wrong shows up in M12 as attacks that look weightless or a character that won't respond to input.
 
@@ -158,12 +158,12 @@
 - **In-place:** the clip animates limbs, the root stays put, *your code* moves the transform. Fully controllable, deterministic, testable. Can skate.
 - **Root motion:** the clip's root bone displacement drives the transform. Unity extracts it and applies it each frame. Looks correct by construction — zero foot slide, real weight — and you have given control of your position to an artist in Sunnyvale in 2019.
 - **The trade-off in one line:** root motion looks right and is hard to control; in-place is controllable and can look wrong.
-- **The policy, and it's the standard one: in-place for locomotion, root motion for attacks and dodges.** Locomotion needs to answer to the stick every frame. An attack is a committed action with a fixed displacement — the lunge *should* come from the swing, and it's exactly what makes a hit feel like it has mass.
+- **Policy: in-place locomotion, controlled root displacement for the one attack and dodge.** Locomotion answers to the stick every frame; committed actions may carry fixed displacement through collision-aware movement.
 - **`Apply Root Motion`** is a toggle on the Animator component, and a per-clip *Root Transform* setting on the import Inspector (bake into pose for position/rotation). Both matter and they interact.
 - **`OnAnimatorMove()`** is the override: implement it and Unity hands you `animator.deltaPosition` / `deltaRotation` to apply yourself. This is how you feed root motion into a `CharacterController` rather than letting it stomp the transform — which is what you need, because you have a `CharacterController`, not a Rigidbody.
 
 ### Build (40 min)
-1. Write the policy in `CONVENTIONS.md` before touching anything: *locomotion in-place, attacks and dodges root motion, applied through `OnAnimatorMove` into the `CharacterController`.*
+1. Write the policy in `CONVENTIONS.md`: *locomotion in-place; the single attack and dodge may use root displacement applied through `OnAnimatorMove` into the `CharacterController`.*
 2. Confirm your locomotion clips are in-place: import Inspector > Animation tab > **Root Transform Position (XZ)** > *Bake Into Pose* ticked. Verify the exact label in the Unity 6 docs if it differs from this — the import UI has changed wording across versions.
 3. Leave `Apply Root Motion` **off** on the Animator for now. Confirm locomotion is unchanged.
 4. Add one of your Mixamo combat swings as a state, entered by a `Trigger`. Import it with root motion **not** baked into pose on XZ, so displacement survives.
@@ -187,7 +187,7 @@
 - **Root motion ignores collision** → you bypassed the `CharacterController`. Always route through `Move`.
 - **Rotation goes wild during attacks** → Root Transform *Rotation* not baked on a clip that turns.
 
-**Stretch:** Add a dodge-roll with root motion and a `Trigger`. It's twenty minutes now and it's half of a Day-88 brief.
+**Stretch:** Preview the dodge clip through the same gated root-motion path; gameplay rules remain M12's job.
 
 **Commit:** `feat: root motion policy for attacks`
 
@@ -204,7 +204,7 @@
 - **An animation event calls a method by name** on a component on the same GameObject, at a specific frame. Set them in the **Animation** window (not the Animator window) with the clip selected, or in the model importer's Animation tab for read-only FBX clips.
 - **The silent-failure trap.** A typo in the method name, a wrong signature, or the component sitting on a child instead of the animated root, and the event fires into nothing. Sometimes you get a console warning. Sometimes you get silence. Assume silence.
 - **The supported signatures are narrow:** no parameters, or exactly one `int`, `float`, `string`, or `Object`. Not two. Not a struct. Design around it.
-- **Timing is normalised to the clip**, so `Animator.speed` changes when events fire. Relevant the moment you add a slowed heavy attack.
+- **Timing is normalised to the clip**, so `Animator.speed` changes when events fire. Recheck events whenever the one attack clip is retimed.
 - **The architectural problem, and it is the point of today.** Core already owns attack timings as data — windup, active, recovery — from M07, and those are unit-tested. If animation events *also* declare when the hitbox opens, you have two sources of truth that will drift, and the one that drifts is the one nobody tested.
 - **Pick one direction and write it down.** Either **(a)** Core's timings are canonical and the animation is authored/retimed to match — better for balance, testability, and reusing your 2D tuning; or **(b)** the animation is canonical and you measure its event frames and feed those numbers *into* Core's data as authored values. Both are defensible. (a) is the recommendation, because your Core tests are the asset you actually have.
 
@@ -243,7 +243,7 @@
 ## Day 83 — NPCs: idles, look-at, and standing somewhere believable
 **Tue 1 Dec · 60 min**
 
-**Objective:** Osric, Enid, and Cob standing in the 3D greybox, breathing, turning their heads when you approach, doing something that isn't waiting.
+**Objective:** Mayor Vale, Deputy Pike, and Mara Bell standing in the 3D greybox, breathing, turning their heads when Alex approaches, doing something that fits a modern town.
 
 **Why:** A village of identical statues reads as a tech demo no matter how good your player character is. Three NPCs with varied idles and a head turn is the cheapest believability you will ever buy.
 
@@ -259,7 +259,7 @@
 1. Download or reuse idle variations: a neutral idle, an arms-crossed idle, a leaning idle, a working/hammering idle, a sitting idle. Log them in `ATTRIBUTIONS.md`.
 2. `Assets/Animation/NPCIdle.controller` — one state per idle variant, chosen by an `int` parameter set once on start. Keep it dumb.
 3. `Unity/NPC/NPCPresence.cs` — **you write it.** On `Start`: pick the configured idle, randomise the phase offset, jitter `Animator.speed` by ±5%.
-4. Place the Act I cast per the story bible. **Osric** working, back half-turned — he's the one who won't ask for help, so give him something to be busy with. **Enid** somewhere she can see the whole yard. **Cob** loitering near you. Save **Vance**, **Bran**, **Iselde**, **Corvin**, and **Tam** for the Vaskirk pass in M14, but stand one of them in the greybox today to check the pipeline scales.
+4. Place the Act I cast per the story bible. **Mayor Silas Vale** works behind his Town Hall desk, **Deputy Nora Pike** checks files or watches the entrance, and **Mara Bell** wipes the diner counter or reviews notes. Keep clothing contemporary and poses civilian. Reserve **June Mercer**, **Eli Reed**, and the Guest Below for their story locations, but import one additional modern rig to prove the pipeline scales.
 5. Enable **IK Pass** on the base layer of the NPC controller. Implement `OnAnimatorIK` with `SetLookAtWeight` (body/head/eyes weights) targeting the player's head height. Verify the current parameter order against the Unity 6 scripting reference — it's easy to get subtly wrong and hard to spot.
 6. Clamp the yaw and lerp the weight from 0 to 1 as the player enters ~6 m and is within the front arc.
 7. Distance-gate: beyond ~15 m, disable IK and drop the Animator's Culling Mode to cull off-screen updates.
@@ -293,7 +293,7 @@
 - **Catch up.** If root motion or animation events ate two days, this is where you land it.
 - **Source more characters.** You have three NPCs and a cast of nine. Download and import the rest as Humanoid now, while the pipeline is muscle memory. It's the least demanding hour of the week and it unblocks M14.
 - **Polish locomotion.** Tune damping, transition durations, and playback speed until walking around the greybox is genuinely pleasant. You'll do it for ten hours over the next month; it should feel good.
-- **Story homework.** Ten lines of Bran's dialogue were due at M07 — if they're still blank, he's teaching you the sword in M12.
+- **Story homework.** Check that Mayor Vale's interruption expressions and the deputies' entrance beats have clear animation needs before M14.
 - **Rest.** You're eight days from the last combat build and the 3D game is real now.
 
 ### Milestone review
@@ -302,10 +302,10 @@ Run `/review`. Ask specifically whether animation state is being *driven from* C
 
 ### Where you are
 
-**The capsule is a person.** He idles, walks, runs, turns, and swings with weight behind it. Three NPCs stand in your village doing something other than existing, and they look at you when you come near. Your Core assembly has not changed once this week — everything you built sits on top of it, which is exactly the point of having built it that way.
+**The capsule is Alex Reed.** Alex idles, walks, runs, turns, and can play one committed improvised swing. Hollowbrook residents occupy Town Hall and the diner like modern civilians, and they look at Alex when approached. Core has not changed once this week; everything built here remains presentation.
 
 You are 84 days in, 75% through, with a shipped 2D game behind you and a 3D one that finally looks like a game rather than a physics demo.
 
-Tomorrow: combat. Light, heavy, dodge, lock-on — rebuilt in 3D over the **same Core combat rules you wrote and tested in M07**. You are not designing combat next week. You are giving combat you already own a body.
+Tomorrow: deliberately simple combat — one improvised attack, one dodge, generous automatic facing, and one creature state machine with two tuned variants over the **same Core rules tested in M07**.
 
 **Commit:** `docs: M11 complete — characters and animation`

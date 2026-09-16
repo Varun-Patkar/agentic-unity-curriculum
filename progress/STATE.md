@@ -5,7 +5,7 @@
 ```yaml
 day: 9
 date_of_day_1: 2026-09-09
-last_session: 2026-09-15
+last_session: 2026-09-16
 days_missed_total: 0
 projected_end: 2026-12-29
 
@@ -44,6 +44,7 @@ status: ready
 - The `Game` scene has an intentionally framed orthographic playfield, a peasant, three chickens, and coherent 16 PPU pixel art.
 - `Background`, `Ground`, `Entities`, and `UI` Sorting Layers exist; entities render over the ground without relying on Z position.
 - Every entity has a `BoxCollider2D`, and Play Mode runs without Console errors.
+- The post-M01 curriculum now targets *Last Stop, Hollowbrook*: a modern supernatural choice RPG with two full-story endings, one first-playthrough dialogue-skip ending, and deliberately simple combat.
 
 ## What is broken
 

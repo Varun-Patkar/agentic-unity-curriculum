@@ -1,24 +1,24 @@
 # M08 · Save/Load & The Game Shell
 
-**Days 57–63 · 5–11 Nov 2026 · project: `Hearthfall`**
+**Days 57–63 · 5–11 Nov 2026 · project: `Hollowbrook`**
 
-> A game you can't quit and come back to isn't a game, it's a demo. This week you put a shell around Hearthfall: serialization, save slots, scene flow, a main menu, and a pause screen. Then, on Monday and Tuesday, you write the ending gate and the three epilogues — the thing every system since M03 has been quietly building toward.
+> A game you can't quit and come back to isn't a game, it's a demo. This week you put a shell around Hollowbrook: serialization, save slots, scene flow, a main menu, and a pause screen. Then you wire exactly three endings from decisions and profile history.
 >
 > The ending gate is about forty lines of pure C#. That's the payoff of keeping the rules in Core.
 
-**You end holding:** a game you can quit and come back to, with a menu, a pause screen, and three endings wired to the ledgers.
+**You end holding:** a game you can quit and come back to, with a menu, a pause screen, and three endings wired to choices, preparation, and first-run eligibility.
 
 ---
 
 ## Day 57 — Serializing Core state, and versioning it before you need to
 **Thu 5 Nov · 60 min**
 
-**Objective:** `GameState` round-trips to JSON and back with nothing lost — including the conscience ledger and pending consequences — and the file says which schema version it is.
+**Objective:** `GameState` and profile history round-trip to JSON with nothing lost — including decisions, preparation, bargain terms, and pending consequences — and the file says which schema version it is.
 
 **Why:** Save serialization is where architecture decisions get invoiced. Yours is good, so today is mostly mechanical — provided you get versioning in before there are saves in the wild.
 
 ### Concepts (10 min)
-- **Core serializes itself.** `Hearthfall.Core` has no `using UnityEngine`, so `JsonUtility` is off the table — and it couldn't handle your data anyway: no dictionaries, no polymorphism, no nullables, no properties.
+- **Core serializes itself.** `Hollowbrook.Core` has no `using UnityEngine`, so `JsonUtility` is off the table — and it couldn't handle your data anyway: no dictionaries, no polymorphism, no nullables, no properties.
 - **`System.Text.Json` vs Newtonsoft.** STJ is fast, modern, and strict; polymorphism needs a converter or a type discriminator. Newtonsoft (`com.unity.nuget.newtonsoft-json`) handles polymorphism with `TypeNameHandling` and is battle-tested in Unity. Pick one, write it in `CONVENTIONS.md`, don't revisit it. Recommended: Newtonsoft for pragmatism, with **explicit discriminators**, not `TypeNameHandling.All` — that setting is a deserialization vulnerability and it bakes assembly names into your save files.
 - **Version field first, always.** `"schemaVersion": 1` at the root. Day one. The migration you'll need is on Day 68 when you rename a flag and every existing save breaks.
 - **A migration is a function `JObject → JObject`**, applied in sequence from the file's version to the current one. Boring, small, and it's why your saves survive the rest of the curriculum.
@@ -26,13 +26,13 @@
 - **Polymorphic collections are your hard case:** `PendingConsequence`, `Condition`, `Effect`. Those are the ones the tests must prove.
 
 ### Build (40 min)
-1. Add your chosen JSON package. Newtonsoft: **Window > Package Manager > + > Add package by name** — `com.unity.nuget.newtonsoft-json` (verify this in Unity 6). Reference it from the `Hearthfall.Core` asmdef.
+1. Add your chosen JSON package. Newtonsoft: **Window > Package Manager > + > Add package by name** — `com.unity.nuget.newtonsoft-json` (verify this in Unity 6). Reference it from the `Hollowbrook.Core` asmdef.
 2. `Core/Persistence/SaveData.cs` — a DTO wrapping `SchemaVersion`, `SavedAtUtc`, a display label, and the `GameState`.
 3. `Core/Persistence/SaveSerializer.cs` — `string Serialize(GameState)` and `GameState Deserialize(string)`. No file I/O in here; that's Day 58's job and it keeps this testable.
 4. Add discriminators to your polymorphic types. A `$kind` string property on the base and a converter that switches on it.
 5. `Core/Persistence/Migrations/` — an `ISaveMigration` with `FromVersion` and `Apply`, plus a runner that chains them. Write zero migrations. Just build the road.
-6. Serialize the conscience ledger explicitly: `ChoiceId`, `Weight`, `Description`, `AtSeconds`. Every field, no exceptions — Day 62 quotes `Description` verbatim.
-7. Test: build a `GameState` with two pending consequences, four conscience points, coin with `LifetimeEarned`, an active quest, and set flags. Save, load, assert deep equality field by field.
+6. Serialize `Decisions`, `PreparedTown`, `BargainTerms`, and `PlaythroughHistory` explicitly. Early-ending eligibility must derive from whether profile history has any completed ending, never from a disposable run flag.
+7. Test: build a `GameState` with two pending consequences, four decisions, preparation and bargain flags, an active quest, and completed profile history. Save, load, assert deep equality field by field.
 8. Test: a payload with `schemaVersion: 0` throws a clear, named exception rather than a `NullReferenceException` three frames later.
 
 ### Acceptance criteria
@@ -40,7 +40,8 @@
 - [ ] `schemaVersion` present in every saved file
 - [ ] Migration chain exists and runs, even with zero migrations registered
 - [ ] Pending consequences round-trip with their concrete types intact
-- [ ] Conscience ledger round-trips with descriptions verbatim
+- [ ] Decisions, PreparedTown, BargainTerms, and PlaythroughHistory round-trip exactly
+- [ ] Early-ending eligibility remains disabled after loading any completed-ending profile
 - [ ] A deep-equality save/load test passes in EditMode
 
 ### Failure modes
@@ -64,7 +65,7 @@
 
 ### Concepts (10 min)
 - **`Application.persistentDataPath`** is the only writable path you can rely on across platforms. On Windows it's under `AppData/LocalLow/<Company>/<Product>`. Never write next to the executable.
-- **What belongs in a save:** Core state. Flags, quest log, conscience ledger, coin, pending consequences, current scene id, player position. That's it.
+- **What belongs in a save:** Core state. Flags, quest log, Decisions, PreparedTown, BargainTerms, pending consequences, PlaythroughHistory, current scene id, player position. That's it.
 - **What doesn't:** anything you can rebuild. Enemy positions, particle state, UI state, camera state. If it's regenerable from Core plus scene data, it's not save data — it's a bigger file and a worse bug.
 - **Atomic writes.** Write to `slot1.tmp`, flush, close, then `File.Replace` or delete-and-move onto `slot1.json`. A crash mid-write then destroys a temp file instead of a ten-hour playthrough.
 - **Never crash on load.** Corrupt file, truncated file, file from a future version, file from a different game — all four must produce a readable message and a working menu, not a stack trace.
@@ -74,11 +75,11 @@
 1. `Unity/Persistence/SaveFileStore.cs` — the only class in the project that touches the filesystem. Read, write, delete, enumerate. It calls Day 57's serializer.
 2. Slot naming: `save_1.json`, `save_2.json`, `save_3.json`, `save_auto.json` under `Path.Combine(Application.persistentDataPath, "saves")`.
 3. Implement the atomic write. Temp file, then replace.
-4. `SaveSlotInfo` — slot index, timestamp, schema version, a label like "Vaskirk · Day 3", and `IsCorrupt`. Enumerating slots must never throw; a slot that fails to parse comes back flagged.
-5. Autosave triggers: scene transition, quest completed, a Three Ledgers choice resolved. Explicit calls from Core event handlers, not a coroutine.
+4. `SaveSlotInfo` — slot index, timestamp, schema version, a label like "Old Mine Road · Eli's Trail", and `IsCorrupt`. Enumerating slots must never throw; a slot that fails to parse comes back flagged.
+5. Autosave triggers: scene transition, quest completed, or one of the four central choices resolved. Explicit calls from Core event handlers, not a coroutine.
 6. Wire an in-game quick save/load to F5/F9 through the Input System for your own testing. Temporary; keep or cut on Day 60.
 7. Corruption test: save, truncate the file to half its bytes, load. Then overwrite it with `{}`. Then with `not json at all`. All three must be handled.
-8. Verify the folder in Explorer. Open a save in an editor and read it. You should be able to see your own conscience ledger in plain text.
+8. Verify the folder in Explorer. Open a save in an editor and confirm the decisions, preparation, bargain terms, and profile history are readable.
 
 ### Acceptance criteria
 - [ ] Saves land in `persistentDataPath`, never the project folder
@@ -86,7 +87,7 @@
 - [ ] Writes are atomic
 - [ ] Autosave fires on events, not on a timer
 - [ ] Three corruption cases load without throwing
-- [ ] Loading a save restores flags, quests, ledger, and coin correctly
+- [ ] Loading restores flags, quests, Decisions, PreparedTown, BargainTerms, and PlaythroughHistory correctly
 
 ### Failure modes
 - **Save works in the Editor, not in a build** → you used a project-relative path. `persistentDataPath` only.
@@ -103,7 +104,7 @@
 ## Day 59 — Scene flow and a game manager that survives scene loads
 **Sat 7 Nov · 60 min**
 
-**Objective:** Move between Hearthfall, the Wealdrun, and Vaskirk without losing state, with a loading screen instead of a frozen frame.
+**Objective:** Move between Town Square, Old Mine Road, and Mercer Mine without losing state, with a loading screen instead of a frozen frame.
 
 **Why:** Scene transitions are where beginners' state management dies. Yours won't, because Core doesn't live in a scene — but you still have to prove it.
 
@@ -148,7 +149,7 @@
 ## Day 60 — Main menu, pause, settings: the shell that makes it a product
 **Sun 8 Nov · 60 min**
 
-**Objective:** A main menu, a pause menu, and a settings screen that persists — the frame that makes Hearthfall feel like software someone shipped.
+**Objective:** A main menu, a pause menu, and a settings screen that persists — the frame that makes Hollowbrook feel like software someone shipped.
 
 **Why:** The shell is the first thing anyone sees on itch.io, and it's ten days away. It's also low-risk work you can do while tired, which is why it's on a Sunday.
 
@@ -190,42 +191,43 @@
 
 ---
 
-## Day 61 — The ending gate: reading Coin, Conscience, and Roots at the final door
+## Day 61 — The ending gate: final choice, preparation, and first-run eligibility
 **Mon 9 Nov · 60 min**
 
 **Objective:** One pure function that takes a `GameState` and returns an `EndingId` — plus tests proving every ending is reachable and no run falls through the cracks.
 
-**Why:** Sixty days of architecture exist so that today is small. The whole thematic payload of Hearthfall passes through about forty lines of C# with no Unity in sight.
+**Why:** Sixty days of architecture exist so that today is small. Hollowbrook's three outcomes pass through one pure function with no Unity in sight.
 
 ### Concepts (10 min)
 - **`EndingSelector` is a pure function.** `GameState` in, `EndingId` out. No I/O, no events, no side effects, no randomness. This makes the most important decision in your game trivially testable.
-- **Three inputs, one gate.** `Coin.LifetimeEarned` — what you *took*, not what you kept. `Conscience` — the ledger's weighted sum, computed here and nowhere else. `Roots` — `FatherHealth`, `ValleyLevy`, `HarvestSold`, `EnidsLastLetterTone`.
-- **Thresholds are data, not literals.** `EndingThresholds` as a record you can tune, override in tests, and adjust after playtesting without touching logic. You will change these numbers four times.
-- **The final choice is not symmetric.** A and C both end on a choice node — stay or go. **B has no choice node.** The gate resolves B *before* the final scene is authored, and the final scene simply isn't offered. That asymmetry is the entire design.
-- **Selection must be total.** Every possible state maps to exactly one ending. Order your checks so B is tested first (it's the most specific), then A, then C as the default. C being the fallback is correct — it's meant to be the common ending.
-- **Still no meter.** The player never sees Coin thresholds, conscience weights, or which ending they're tracking toward. Not in the journal, not in the debug build's HUD, nowhere the player can reach.
+- **Three outputs, explicit precedence.** `JustPassingThrough` wins only when the Mayor skip trigger fired and `PlaythroughHistory.IsEarlyEndingEligible` is true. Otherwise the finale resolves one of the two full-story endings.
+- **The final choice is explicit.** Break the bargain can produce `MorningInHollowbrook` when enough people/routes are prepared; accepting the offer produces `NewKeeper`, whose epilogue reads `BargainTerms` and concrete decisions.
+- **Preparation is consequence, not morality.** Define named requirements such as people warned, routes opened, or evidence shared. Keep them in data so playtesting can tune what "enough" means.
+- **Selection must be total.** Every reachable final state maps to exactly one ending, and there is no fourth fallback.
+- **No meter.** The player sees people, routes, dialogue, and outcomes, never a preparation score or hidden ending projection.
 
 ### Build (40 min)
-1. `Core/Endings/EndingId.cs` — `SetTheSwordDown`, `TheTithe`, `ThePeasantKnight`.
-2. `Core/Endings/EndingThresholds.cs` — a record with the coin and conscience boundaries, plus a `Default` static. Comment each number with the *design intent*, not the value.
-3. `Core/Endings/EndingSelector.cs` — `static EndingId Select(GameState state, EndingThresholds t)`. Compute the conscience sum from the ledger inline; do not cache it on `GameState`.
-4. B first: conscience below floor **and** lifetime coin above the high bar **and** at least two of the Three Ledgers taken. A second: conscience above ceiling and coin above the "enough to clear the debt" line. C otherwise.
-5. `Core/Endings/EndingGate.cs` — resolves the ending, records it into `GameState`, and exposes `OffersFinalChoice` (false for B). The final scene reads this and branches.
-6. Author the final-choice dialogue node for A and C: stay, or go. It's one node with two options and it decides nothing except which epilogue plays — the ending was already chosen.
-7. Tests, one per ending, driven by `PlaythroughDriver`: a clean run, a take-all-three run, and a middling run. Assert the `EndingId` **and** `OffersFinalChoice`.
-8. A totality test: generate a grid of coin/conscience/flag combinations and assert every one returns a valid ending and never throws.
+1. `Core/Endings/EndingId.cs` — exactly `MorningInHollowbrook`, `NewKeeper`, `JustPassingThrough`.
+2. `Core/Endings/EndingRules.cs` — named preparation requirements for the break-bargain outcome, tunable in tests and after playtesting.
+3. `Core/Endings/EndingSelector.cs` — `static EndingId Select(GameState state, EndingRules rules)`. It reads skip trigger, profile history, final choice, `PreparedTown`, and `BargainTerms` without mutating them.
+4. Check early ending first: eligible profile plus completed warning escalation and skip trigger → `JustPassingThrough`. If ineligible, ignore the trigger permanently.
+5. Resolve the full finale: accept the final offer → `NewKeeper`; break the bargain with required preparation → `MorningInHollowbrook`. Prevent reaching the break choice before the preparation contract can be satisfied, so selection stays total without inventing an ending.
+6. `Core/Endings/EndingGate.cs` records completion into `PlaythroughHistory`. Completing any ending permanently disables future skip punishment for that profile.
+7. Tests, one per ending, driven by `PlaythroughDriver`; add explicit tests that Instant reveal cannot select the early ending and completed history disables it on a new game.
+8. A totality test generates reachable combinations of final choice, preparation, bargain terms, skip trigger, and history; every result is one of exactly three IDs.
 
 ### Acceptance criteria
 - [ ] `EndingSelector.Select` is pure — no fields, no I/O, no Unity
-- [ ] Thresholds live in a tunable data record
-- [ ] All three endings reachable and covered by a playthrough test
+- [ ] Preparation requirements live in a tunable data record
+- [ ] Exactly three endings are reachable and covered by playthrough tests
 - [ ] Selection is total across a generated combination grid
-- [ ] Ending B reports `OffersFinalChoice == false`
-- [ ] Nothing in the UI exposes any ledger value to the player
+- [ ] Early ending requires both a valid skip trigger and no prior completed ending
+- [ ] Final choice and preparation map only to the two full-story endings
+- [ ] Nothing in the UI exposes hidden preparation or ending values
 
 ### Failure modes
-- **Every test run returns C** → your thresholds are wrong, not your logic. Log the actual computed values in the test and calibrate against a real playthrough.
-- **B unreachable** → the coin bar is above what a full-corruption run actually earns. Have `PlaythroughDriver` print `LifetimeEarned` for the take-all-three run and set the bar from that.
+- **Morning is unreachable** → the preparation contract includes a flag no playable route can set. Test the actual authored path, not a hand-built state.
+- **Skip ending appears on repeat runs** → eligibility was stored in run state instead of persistent `PlaythroughHistory`.
 - **Ending changes after you look at it** → something in the gate mutated state. It's a query. Make the method static and the argument read-only if you have to.
 - **Debug window leaks the ending** → fine in the Editor window, never in a player-facing build.
 
@@ -235,48 +237,48 @@
 
 ---
 
-## Day 62 — Writing the three epilogues, and making B land without a score screen
+## Day 62 — Writing all three epilogues
 **Tue 10 Nov · 60 min**
 
-**Objective:** Three playable epilogues, one of which quotes the player's own conscience ledger back at him, and an "endings seen" record in the journal.
+**Objective:** Three substantial playable epilogues that resolve the town, Eli, Vale, and the player's concrete decisions, plus an Endings Seen record.
 
 **Why:** This is the day the game means something. Everything else is machinery for this.
 
 ### Concepts (10 min)
-- **Epilogues are content, and you already have the system.** They're dialogue sequences with conditions. No new tech today except one piece: text that interpolates from the ledger.
-- **Ending B's power is specificity.** Not "you were ruthless" — *"you named Tam Ferrier in the third week of Lent."* Pull the real `ConsciencePoint.Description` strings, in chronological order by `AtSeconds`, and print them as a list. That is the score screen, except it's in his own handwriting and it isn't scored.
-- **Direction for B: subtract.** No music sting. No score screen. No villain reveal. No "The End" card that congratulates. A cold, procedural read of the ledger, a long pause, and the final image. Silence is the loudest tool you own and this is the one place to use it.
-- **A and C need warmth and restlessness respectively.** A: he is going to be poor and tired forever and it was the right trade — write it plainly, don't oversell it. C: the money in Enid's hands, one meal, the road in the morning. Bittersweet, not tragic.
-- **Author the descriptions carefully.** Every `AddConsciencePoint` call across the whole game now doubles as epilogue text. Go back and rewrite the lazy ones today, while it's cheap.
-- **The trap:** explaining the ending. If the epilogue tells the player what it meant, you've written a lecture. Show the levy figure, the empty field, the last letter. Let him do the arithmetic.
+- **Epilogues are content, and you already have the system.** They're dialogue sequences with conditions. No new tech today except projecting authored beats from decisions, preparation, and bargain terms.
+- **Morning in Hollowbrook is costly and hopeful.** The bargain is gone, prepared townspeople survive and rebuild, Eli returns changed but alive, and Vale's fate reflects how Alex treated him. End at the diner reopening on a camping stove.
+- **The New Keeper is calm and compromised.** Alex accepts the office, saves Eli, and preserves the boundary. Earlier decisions and `BargainTerms` decide who helps, leaves, or opposes the new keeper. End with a newcomer entering Vale's old office.
+- **Just Passing Through commits to the joke.** Deputies escort Alex onto the last bus; credits solemnly report distance travelled, mysteries solved `0`, townspeople saved `0`, and time in office under three minutes. Then unlock the badge and a normal New Game.
+- **Specificity beats scores.** Each full ending cites concrete `DecisionRecord` descriptions and named preparation or bargain terms. Never summarize Alex as virtuous or wicked.
+- **The trap:** explaining the ending. Show changed places and people, then let the player do the arithmetic.
 
 ### Build (40 min)
-1. `Content/Endings/ending_a.json`, `ending_b.json`, `ending_c.json` — your existing dialogue format, launched by `EndingGate`.
-2. A `ConscienceLedgerRecital` effect type: emits the ledger's descriptions, ordered by `AtSeconds`, one per beat, with a deliberate pause between each. Used only by B.
-3. Audit every `ConsciencePoint.Description` in your content. Rewrite each as a plain declarative sentence in past tense — it must read well standing alone in a list.
-4. Write B's final image. This was your M08 story homework; if it isn't decided, decide it in the first ten minutes. Whatever it is, it should be an image of the valley or the house, not of him.
-5. Write A and C. A: the sword above the hearth, the roof, the debt cleared. C: the coin in Enid's hands, one meal, gone by morning.
-6. Presentation: fade to black between beats, unscaled timing, no skip on the first pass. Disable the pause menu during epilogues.
-7. `EndingsSeen` in `GameState` — a set of `EndingId`. Recorded on completion, shown as a third journal tab, undiscovered ones as locked slots with no hints.
-8. **Play B end to end.** Do not skip it because you wrote it. If it doesn't land on you, it won't land on anyone; fix it now.
+1. Author `morning_in_hollowbrook.json`, `new_keeper.json`, and `just_passing_through.json` in the existing dialogue format, launched by `EndingGate`.
+2. Add an epilogue projection that selects beats from `Decisions`, `PreparedTown`, and `BargainTerms`; it emits content keys, not generated prose.
+3. Audit every `DecisionRecord.Description`. Each must be a plain factual sentence that can be cited without sounding like a debug log.
+4. Write the complete Morning epilogue: final-night damage, named survivors, Eli, Vale's branch, rebuilding, diner image.
+5. Write the complete Keeper epilogue: Eli, preserved town, terms of Alex's bargain, allies/enemies, mirrored office image.
+6. Write the complete skip epilogue and credits statistics, then unlock its profile badge and normal New Game.
+7. `PlaythroughHistory.EndingsSeen` is shown as a journal/profile view; undiscovered endings remain locked with no hints. Any completed ending disables skip punishment.
+8. Play all three end to end at least once. Presentation uses unscaled timing and allows the same accessibility reveal settings as dialogue.
 
 ### Acceptance criteria
-- [ ] All three epilogues playable through the ending gate
-- [ ] B recites real conscience-ledger descriptions in chronological order
-- [ ] B has no score screen, no music sting, and no final choice
-- [ ] Every conscience description reads as a standalone sentence
-- [ ] `EndingsSeen` persists in the save and shows in the journal
-- [ ] You played B and it landed
+- [ ] All three epilogues are complete and playable through the ending gate
+- [ ] Morning resolves rebuilding, Eli, Vale, and preparation outcomes
+- [ ] Keeper resolves Eli, bargain terms, prior decisions, and the mirrored office image
+- [ ] Skip ending includes ejection, deadpan statistics, credits, badge, and normal New Game
+- [ ] `EndingsSeen` persists in profile history and disables later skip punishment
+- [ ] You played all three end to end
 
 ### Failure modes
-- **B's recital reads as a bug list** → your descriptions are system messages, not prose. Rewrite them; it's the fix and it's fast.
-- **The ledger is empty in B** → conscience points weren't recorded on the corrupt path. Check with the State Inspector mid-run, not after.
+- **Epilogue beats read as a bug list** → your decision descriptions are system messages, not prose. Rewrite them.
+- **Keeper variants are empty** → bargain terms were not recorded on the accepted path. Check with the State Inspector mid-run.
 - **Fades hang** → `WaitForSeconds` again. Unscaled everywhere in the epilogue.
 - **Ending feels rushed** → it's too fast. Double every pause and play it again. Almost always the right call.
 
-**Stretch:** One Kokoro-voiced line at the end of B, flat and unemotional. One line, not a scene. If it's the wrong side of melodramatic, cut it without regret.
+**Stretch:** One restrained voiced line at the end of Keeper. One line, not a scene; cut it if it becomes melodramatic.
 
-**Commit:** `content: three endings with conscience recital`
+**Commit:** `content: three hollowbrook epilogues`
 
 ---
 
@@ -284,20 +286,20 @@
 **Wed 11 Nov**
 
 - **Catch up.** Days 57–62 are dense and two of them are content days.
-- **Tune the ending thresholds.** Play a take-all-three run and a clean run and set the numbers from real values, not guesses.
-- **Story homework:** **Ending B's final image** was due by M08. If Day 62 shipped a placeholder, fix it today — it's the last frame of your game.
+- **Tune preparation requirements.** Play the authored break-bargain route and verify every required flag is naturally reachable.
+- **Story homework:** final images for both full endings and the skip-ending statistics are due. Replace any placeholders today.
 - **Polish the shell.** The main menu is your itch.io screenshot in seven days.
 - **Rest.** Ship week starts tomorrow.
 
 ### Milestone review
 
-Run `/review`. Ask specifically whether any ending logic lives outside `EndingSelector` — a UI check like "if coin > 500 show the other button" anywhere in `Hearthfall.Unity` means the gate is no longer the single source of truth, and it will drift.
+Run `/review`. Ask specifically whether any ending logic lives outside `EndingSelector` — a UI check on preparation or profile history anywhere in `Hollowbrook.Unity` means the gate is no longer the single source of truth, and it will drift.
 
 ### Where you are
 
-**Hearthfall is a game you can quit and come back to.** It has a menu, a pause screen, saves that survive a crash mid-write, scene flow that doesn't leak, and three endings selected by a forty-line pure function that a test suite proves is total.
+**Hollowbrook is a game you can quit and come back to.** It has a menu, a pause screen, saves that survive a crash mid-write, scene flow that doesn't leak, and exactly three endings selected by a pure function that a test suite proves is total.
 
-You have written an ending that refuses to congratulate the player, and it works because you kept a ledger of descriptions instead of an integer. That decision was made on Day 34 and it paid off yesterday. That's what the architecture was for.
+The full endings cite concrete choices instead of a morality number, and the secret ending respects accessibility and returning players. That's what the architecture was for.
 
 63 days in, 56% through. Tomorrow starts **M09: ship week.** Bug triage, performance, a build that runs on a machine that has never had Unity installed, a store page, screenshots — and on **Day 70, a public itch.io release** of the 2D vertical slice. Strangers will play this. That's a different kind of week and it starts in the morning.
 

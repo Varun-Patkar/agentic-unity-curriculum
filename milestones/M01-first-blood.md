@@ -59,7 +59,7 @@
 
 **Objective:** The peasant moves with WASD *and* a gamepad, from one Input Actions asset, with zero `Input.GetKey` anywhere.
 
-**Why:** You'll use the same setup in Hearthfall for the next 100 days. Learning the modern system now means never having to unlearn the old one.
+**Why:** You'll use the same setup in Hollowbrook for the next 100 days. Learning the modern system now means never having to unlearn the old one.
 
 ### Concepts (10 min)
 - **Why the new system exists:** the old `Input` class hardcodes devices, can't rebind at runtime, and can't handle multiple players. The new one separates *what the player is trying to do* from *what button they pressed*.
@@ -282,6 +282,6 @@ Run `/review` on `ChickenChase`. It's throwaway code, so this is the cheapest po
 
 Fourteen days in, you have **shipped a game**. Not a tutorial you followed — a thing you built, from empty project to zipped build with a menu, sound, and a win state. Most people who set out to learn Unity never do this once.
 
-The training wheels come off tomorrow. Day 15 starts `Hearthfall`, and everything you write from here survives to December.
+The training wheels come off tomorrow. Day 15 starts `Hollowbrook`, and everything you write from here survives to December.
 
 **Commit:** `docs: M01 complete — first game shipped`

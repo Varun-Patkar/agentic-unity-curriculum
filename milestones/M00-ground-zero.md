@@ -137,7 +137,7 @@ Read `reference/csharp-for-unity.md` sections "The MonoBehaviour lifecycle" and 
 
 **Objective:** Spawn fifty objects at runtime from one template, change the template, and watch all fifty change.
 
-**Why:** Prefabs are how every enemy, every prop, every bullet, and every NPC in Hearthfall will exist. They're also the thing that fixes the copy-paste problem you hit on Day 2.
+**Why:** Prefabs are how every creature, every prop, and every NPC in Hollowbrook will exist. They're also the thing that fixes the copy-paste problem you hit on Day 2.
 
 ### Concepts (10 min)
 - **A prefab is a serialized GameObject template stored as an asset.** A prototype, in the pattern sense.

@@ -1,6 +1,6 @@
-# Hearthfall — An Agentic Unity Curriculum
+# Last Stop, Hollowbrook — An Agentic Unity Curriculum
 
-**112 days. One hour a day. From "I have never shipped a game" to a released 3D action-RPG with branching choices.**
+**112 days. One hour a day. From "I have never shipped a game" to a released 3D choice RPG with branching consequences.**
 
 You are not going to watch tutorials. You are going to build things, break them, fix them, and commit them. An AI agent sits beside you as a pair — not as a teacher reading a script, and never as the person who writes your game for you.
 
@@ -34,9 +34,9 @@ They live in [.github/prompts/](.github/prompts/). Any agent, any model — the 
 
 ## What you are building
 
-**Hearthfall.** A medieval peasant leaves a starving valley to find coin and glory. He finds both. The road home is where the game actually happens.
+**Last Stop, Hollowbrook.** Alex Reed returns to an ordinary small town after their sibling disappears and discovers that Mayor Vale has kept it safe through a bargain with something beneath the old mine.
 
-Dark, grounded, Kingdom-Come-adjacent. Light combat, heavy consequence. Three endings, and the one that hurts most is the one you will have argued yourself into, choice by reasonable choice.
+A modern supernatural-town choice RPG: sincere mystery, light combat, lasting consequences, and exactly three endings, including one first-playthrough secret for players who refuse to hear the Mayor out.
 
 Full design in [reference/story-bible.md](reference/story-bible.md). It is *your* story — the bible is a scaffold with your name on the blanks.
 
@@ -64,7 +64,7 @@ D:\Projects\Unity Games\
   Unity Agentic Tutorial\     <- this repo (curriculum)
   Sandbox00\                  <- M00 throwaway
   ChickenChase\               <- M01 throwaway, your first finished game
-  Hearthfall\                 <- M02 onward. The real one.
+  Hollowbrook\                <- M02 onward. The real one.
 ```
 
 Each Unity project is its own git repo. The curriculum never contains game code, so you can wipe and restart a project without losing your plan.
@@ -85,7 +85,7 @@ This was built for one person, but nothing in it is personal. If you want to run
 
 1. Fork or clone the repo. It contains no game code — only the plan.
 2. Read [AGENTS.md](AGENTS.md). It is the file that makes an AI agent behave like a pair rather than a code vending machine. Most of the value is there.
-3. Change the game. `Hearthfall` is a placeholder — swap [reference/story-bible.md](reference/story-bible.md) for your own premise and the milestones still hold, because they teach systems, not content.
+3. Change the game. Swap [reference/story-bible.md](reference/story-bible.md) for your own premise and update the content briefs; the milestones teach systems, but their examples deliberately use Hollowbrook's cast and choices.
 4. Reset [progress/STATE.md](progress/STATE.md) to Day 1 and shift the dates.
 
 **Assumed background:** comfortable in C#, comfortable with git, zero Unity. If you're new to programming, the pacing will be brutal — the briefs skip every language concept on purpose.

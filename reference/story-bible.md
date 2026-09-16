@@ -1,152 +1,173 @@
-# Story Bible — *Hearthfall*
+# Story Bible — *Last Stop, Hollowbrook*
 
-> **Status: DRAFT SCAFFOLD.** This is a structure with your name on the blanks, not a finished story. You said you want to think the narrative through properly — good, you should. What follows is designed so that you can replace every name, place, and line of dialogue without touching a single system. The *shape* is what the code depends on.
+> **Status: DRAFT SCAFFOLD.** The premise and scope are locked; names and individual lines can change without changing the systems.
 >
-> **Working title:** `Hearthfall`. One find-and-replace to change it.
+> **Working title:** `Last Stop, Hollowbrook`.
 
 ---
 
 ## 1. The one-line pitch
 
-*A peasant leaves a starving valley to find coin and glory. He finds both. The game is the road home.*
+*You return to a painfully ordinary small town after your sibling disappears, discover the Mayor has kept Hollowbrook safe through a bargain with something beneath it, and decide whether to destroy the bargain or inherit it — unless the Mayor throws you out before the story starts.*
 
-## 2. The theme
+## 2. Tone and promise
 
-The thing worth exploring, in your words: **the most successful people are often the richest, and often they lost themselves getting there — and it worked.**
+This is a sincere, cliché supernatural mystery with one committed joke. It uses familiar pieces on purpose: the missing sibling, the suspicious Mayor, the diner that knows everyone, the abandoned mine, the local cult, and the ancient thing under the town.
 
-So the game must refuse the easy moral. Being ruthless in Vaskirk **works**. It pays, visibly, in coin the player watches accumulate. Nobody punishes you. The city rewards you exactly as it promised. The bill arrives somewhere else entirely, addressed to people who never met the man who signed for it.
+The game is not a parody. Outside the skip ending, characters take the danger seriously and choices have lasting consequences. The story stays small enough to finish and gives both main endings room to breathe.
 
-Three rules that keep this honest:
+Three rules:
 
-1. **No moral meter. No karma UI. Ever.** The moment the player sees a red bar, the theme dies — it becomes a puzzle to optimise instead of a life to live.
-2. **Every corrupt choice is argued for by someone sympathetic and correct.** If the player can dismiss the tempter as a villain, he has not been tempted. Vance must be *right*.
-3. **Consequences are delayed, displaced, and diegetic.** Never "your reputation decreased." Always: a letter that mentions food less than the last one did.
+1. **No morality meter.** Record decisions and cite them back through dialogue and epilogues.
+2. **The Mayor's bargain genuinely protected people.** Destroying it is not an obviously correct button.
+3. **The joke ending is staged like a real ending.** It gets escalation, a consequence, an epilogue, and credits rather than a throwaway game-over message.
 
 ## 3. The three endings
 
-Ending is determined by two hidden ledgers (`Coin`, `Conscience`) **plus one final choice**. That last part matters: in two of three endings the player chooses. In the third, the choice has already been made, in a counting-house, months ago, in good handwriting.
+There are exactly three endings. Two conclude the full story. One is an early first-playthrough secret ending.
 
-### Ending A — "Set the Sword Down"
-**Conscience: high · Coin: modest but sufficient · Final choice: stay**
+### Ending A — "Morning in Hollowbrook"
+**Break the bargain · enough townspeople prepared or rescued**
 
-You turned down the profitable things. You came home poorer than you could have been — but with real coin, enough to buy the valley out of debt and put a roof on. The family is whole. You hang the sword above the hearth and you are a farmer again, and the game does not treat that as a small thing.
+You destroy the thing beneath the mine and end the bargain. The supernatural protection around Hollowbrook disappears with it. The final night damages the town, but the people you warned survive and begin rebuilding without sacrifices, missing-person cover-ups, or a Mayor deciding who counts as an acceptable loss.
 
-*Tone: quiet, earned, warm. Not saccharine. He is going to be poor and tired for the rest of his life and it is the right trade.*
+Your sibling comes home changed but alive. The Mayor either helps evacuate the town or dies defending the bargain, based on how you treated him during the investigation. At dawn, the diner opens using a camping stove. The town is frightened, ordinary, and finally its own.
 
-### Ending B — "The Tithe" · **the gut-punch**
-**Conscience: low · Coin: maximum · Final choice: removed**
+*Tone: costly, hopeful, practical. Freedom does not repair the buildings for them.*
 
-You did the arithmetic. Every step was defensible, most of it was legal, and all of it paid. The Assize was honest bookkeeping. The name you gave was a criminal's. The grain contract was a fair price agreed by willing parties.
+### Ending B — "The New Keeper"
+**Preserve the bargain · accept the final offer**
 
-You ride home rich. The levy on the Weald went up by a third — you saw the figure yourself, you helped produce it, you took a share of it. Your father sold the oxen. Then the field. Then he stopped writing.
+You learn that destroying the thing will also remove the boundary keeping worse things away. You take the Mayor's place as Hollowbrook's keeper, save your sibling, and preserve the town exactly as visitors expect to find it: quiet streets, cheap coffee, no violent crime, and one disappearance every few years.
 
-The final scene offers you no choice at all. That is the punch: this game has asked you what you want to do for ten hours, and here, at the only moment it matters, it doesn't ask. Because you already answered.
+The epilogue shows how earlier choices determine your version of the bargain. People you trusted may help choose the next name, leave town forever, or become your first enemies. The final image mirrors the opening meeting: you sit behind the Mayor's desk while a newcomer enters with questions.
 
-*Tone: cold, procedural, quiet. **No score screen. No villain reveal. No music sting.** Let him sit in the room. The most brutal thing the game can do here is show him the ledger in his own hand.*
+*Tone: calm, compromised, ominous. You saved everyone currently in the room.*
 
-### Ending C — "The Peasant Knight"
-**Conscience: middling · Coin: high · Final choice: go**
+### Ending C — "Just Passing Through"
+**First playthrough only · repeatedly skip the Mayor's briefing**
 
-You bent when bending paid and held when holding mattered. You didn't ruin anyone, but you didn't save anyone either — you took the situational route every time and it worked out. You come home with real money, you put it in your sister's hands, you eat one meal at your father's table, and in the morning you are on the road again.
+The Mayor begins politely, notices the interruptions, becomes visibly annoyed, and finally loses his temper. Two deputies escort you out of Town Hall, put you back on the last bus, and warn the driver not to stop in Hollowbrook again.
 
-Not a hero, not a monster. A man who found out what he's for and it isn't this valley. The family is fine. They will see him maybe twice more before he dies.
+The credits recap your adventure with absolute seriousness: distance travelled, mysteries solved (`0`), townspeople saved (`0`), and time in office (`under three minutes`). After the credits, the title screen unlocks a small badge and a normal New Game. This ending never triggers after any completed ending, so repeat players can move quickly without punishment.
 
-*Tone: bittersweet, restless, honest. This is probably the most common ending, and it should feel like the most human one.*
+*Tone: escalating deadpan. The Mayor is ridiculous, but the game keeps a straight face.*
 
 ---
 
-## 4. The hidden ledgers
+## 4. The choice ledger
 
-Both live in `Hearthfall.Core`. Neither is ever shown.
+The systems live in the engine-agnostic Core assembly and are never shown as scores.
 
-**`Coin`** — actual currency, plus a `LifetimeEarned` counter that never decreases. What matters for the ending is what you *took*, not what you still have.
+**`Decisions`** — a list of significant choices, each with a choice ID, description, and flags. Endings and epilogues cite concrete decisions rather than a morality total.
 
-**`Conscience`** — not a score, a **ledger of decisions**. `List<ConsciencePoint>`, each with the choice ID, the weight, and the flag it set. This matters for two reasons:
-- It lets the epilogue *cite specific choices back at the player*: "you named Tam Ferrier in the third week of Lent." A single number could never do that. This is the whole reason Ending B lands.
-- It makes the system testable in a console app with no Unity involved.
+**`PreparedTown`** — flags for people warned, routes opened, and evidence shared. Ending A reads these to decide who survives the final night and what remains standing.
 
-**`Roots`** — a small set of flags about the family and the valley, mutated by delayed consequences: `FatherHealth`, `ValleyLevy`, `TollgateOpen`, `HarvestSold`, `EnidsLastLetterTone`.
+**`BargainTerms`** — flags recording compromises: accepted protection, concealed evidence, promised a replacement, or refused every offer. Ending B reads these to show what kind of keeper the player becomes.
 
-Ending selection reads all three at the final gate. Nothing else does.
+**`PlaythroughHistory`** — whether any ending has been completed and which endings have been seen. The dialogue-skip ending is eligible only when no ending has ever been completed in the profile.
 
-## 5. The Three Ledgers — the mechanism
+## 5. The Mayor's patience — the signature mechanic
 
-The spine of the whole design. Three optional, profitable, *individually reasonable* jobs in Vaskirk, each of which sets a flag that resolves back home in Act III. Each has an honest alternative that pays less and costs nothing later.
+The opening briefing introduces Mayor Silas Vale, establishes the mystery, and quietly watches how the player treats the conversation.
 
-| # | The job | Who asks | Why it's reasonable | What it does to the Weald |
-|---|---|---|---|---|
-| 1 | **The Assize** — help re-survey the Weald's true yield for the levy | Steward Vance | The old rolls are decades out of date and genuinely wrong. Accuracy is not a crime. You get a surveyor's share. | The levy on Hearthfall rises by a third. Your father cannot pay it. |
-| 2 | **The Name** — identify who is running grain past the tollgate | Vance, on the Sheriff's behalf | Tam Ferrier *is* a smuggler. He is not a good man. There is a real bounty and you have a real need. | The tollgate route closes. Cheap grain stops reaching the valley. |
-| 3 | **The Forward Contract** — sell the Weald's next harvest to the Grain Hall now, at a set price | Iselde | A guaranteed price protects farmers from a bad market. Genuinely. Sometimes it even helps them. You take the broker's fee. | The harvest is sold before it is grown. The winter is hungry. |
+### What counts as a skip
 
-**Take all three → Ending B is fully earned and entirely the player's own reasoning.**
-**Take one or two → the world is damaged but survivable. Ending C territory.**
-**Take none and you will be visibly, painfully poorer for most of Act II** — and that must genuinely sting, or Ending A means nothing.
+A skip is an Advance input while typewriter text is still revealing. The first press completes the current line as normal and increments `EarlyAdvanceCount` for this conversation.
 
-### The design rule that makes this work
-> The player must never be able to say *"the game tricked me."* Every consequence must be foreseeable in hindsight and invisible in the moment. If a player replays and thinks *"oh — it told me, I just wasn't listening"*, the design succeeded.
+These do **not** count:
 
-## 6. Enid's letters — the feedback channel
+- advancing after the full line is visible
+- selecting a dialogue choice
+- setting text speed to Fast or Instant
+- using an accessibility option that reveals complete lines
+- advancing quickly on later playthroughs
 
-Three letters from your sister arrive during Act II. They are the entire consequence-feedback system, and they cost nothing to build because they are text.
+### Escalation
 
-They **never accuse**. They never mention the levy, the tollgate, or the contract. They simply change:
+| Count | Mayor response | Presentation |
+|---|---|---|
+| 0–1 | Continues normally | Neutral portrait and voice |
+| 2 | "Am I keeping you?" | Annoyed portrait; one inserted line |
+| 3 | Restarts the interrupted sentence slowly | Sharper expression; longer pause |
+| 4 | Final warning | Furious portrait; deputies enter the background |
+| 5 | Ends the meeting | Rage animation, deputies eject the player, Ending C begins |
 
-- **Letter 1** — long, warm, gossip about neighbours, asks what the city looks like.
-- **Letter 2** — shorter. Practical. Asks when you're coming back. Mentions the price of things, once, then apologises for mentioning it.
-- **Letter 3** — four lines. Does not mention food at all. Signs off differently.
+The warning lines are part of the dialogue graph, not hardcoded in the UI. Core owns the count and emits an irritation stage; Unity owns portraits, animation, sound, and camera work.
 
-The tone of each is selected by how many Ledgers you've taken. Clean run: the letters stay warm and get funnier. Full-corruption run: letter 3 is four lines and one of them is a lie.
+### Fairness rules
 
-*This is the cheapest, highest-impact narrative system in the whole game. Build it well.*
+- The final warning must be unmistakable before the ending can trigger.
+- The count resets if the player reloads a save from before the meeting.
+- Once any ending has been completed, the profile permanently disables punishment and the first press only reveals text.
+- Automated tests prove Instant text and fully revealed advances cannot trigger Ending C.
+
+## 6. The central choices
+
+The full run has four major choices. Each is simple to understand and changes visible details in both main endings.
+
+| Choice | Safe-looking option | Risky-looking option | Later consequence |
+|---|---|---|---|
+| The deputy's files | Give the evidence to reporter Mara | Return it to Mayor Vale | More people learn the truth, or the evacuation stays orderly |
+| The mine entrance | Seal it after rescuing Eli | Leave it open to investigate deeper | Fewer creatures escape, or you learn the bargain's real terms |
+| The marked resident | Hide June from the town | Hand her to the Mayor for protection | June aids the final ritual, escapes, or becomes part of the bargain |
+| The emergency siren | Warn everyone immediately | Keep silent to avoid panic | A messy evacuation, or more people caught unaware |
+
+No option is labelled good or evil. The player should understand the immediate trade-off even when the delayed result is uncertain.
 
 ## 7. Cast
 
-> Placeholder names, drawn Anglo-Saxon/Norman to sit in a KCD register. Replace freely — the **role** is what matters.
-
 | Character | Role | The thing that makes them memorable |
 |---|---|---|
-| **(player-named)**, default **Wat** | The peasant | Not chosen, not special, not secretly a lord's son. Emphatically ordinary. |
-| **Osric** | Father | Proud past the point of sense. Will not write to ask for help, and that is what kills him. |
-| **Enid** | Sister | Runs the farm in practice. Writes the letters. Sharper than everyone in the valley including you. |
-| **Cob** | Younger brother | Wants to follow you. In one ending he does. |
-| **Aldric Vance** | Steward of Vaskirk — **the tempter** | Decent, tired, competent, and *right*. Believes accurate records are a public good. He is not lying to you once. |
-| **Sgt. Brannoc "Bran"** | Mercenary, teaches you the sword | Situational morality worn openly and without shame. He is Ending C, walking around. He is also the only one who's honest with you. |
-| **Iselde of the Grain Hall** | Broker | Transactional, funny, zero illusions about what she does. Likes you. Would ruin you and say so first. |
-| **Father Corvin** | Priest | The conscience voice — and a hypocrite, so the player can't just outsource his morality to him. |
-| **Tam Ferrier** | Smuggler | Genuinely a criminal. Genuinely the reason your valley eats. Both true at once. |
+| **Alex Reed** | Player character | Returned only to find younger sibling Eli; practical, not chosen or magical |
+| **Eli Reed** | Missing sibling | Left clues because nobody in authority would admit what was happening |
+| **Mayor Silas Vale** | Town authority and current keeper | Polished civic patience over a spectacular temper; believes the bargain is necessary |
+| **Deputy Nora Pike** | Guard-equivalent and reluctant ally | Enforces Vale's orders but keeps copies of everything |
+| **Mara Bell** | Diner owner and local reporter | Knows every rumour and verifies them before repeating them |
+| **June Mercer** | Resident marked by the bargain | Funny, frightened, and unwilling to become a noble sacrifice |
+| **The Guest Below** | Supernatural force | Speaks using familiar voices and never states a direct lie |
 
 ## 8. Places
 
 | Place | Function | Note for the art-direction milestone (M13) |
 |---|---|---|
-| **Hearthfall** | Home hamlet in the Weald. Village hub, Act I and Act III. | Same geometry both acts. **Only the light, weather, and props change.** Cheapest, most devastating storytelling in the game. |
-| **The Wealdrun** | The road. Travel, ambush, the tollgate. | Long, cold, empty. Where the two combat encounters live. |
-| **Vaskirk** | The city. Act II. Counting-house, Grain Hall, barracks, cathedral steps. | Warmer, denser, richer light than the valley. It should look *better*. It should look like it's worth it. |
-| **Greyhold** | The keep / dungeon. The "adventure" you came for. | The one place that looks like a fantasy game. Deliberately. It's the lie you were sold. |
+| **Town Square** | Hub: Town Hall, diner, sheriff's office | One compact street reused by day, dusk, and the final night |
+| **Old Mine Road** | Travel and simple combat encounters | A short wooded route with two encounter clearings |
+| **Mercer Mine** | Investigation and finale | Reuse modular tunnels; lighting does most of the storytelling |
+| **Town Hall** | Opening briefing and Ending B mirror scene | The same office frames the Mayor and later the player |
 
 ## 9. Three acts, mapped to the build
 
 | Act | Content | Built in |
 |---|---|---|
-| **I — The Leaving** | Hearthfall. Establish family as people, not backstory. The valley is in trouble but survivable. You choose to go. | M04–M06 (2D) · M14 (3D) |
-| **II — Vaskirk** | The city. Bran teaches you to fight. Vance offers the Assize. Iselde offers the contract. Greyhold pays out. Enid's letters arrive. | M05–M09 (2D) · M12–M14 (3D) |
-| **III — The Road Home** | The Wealdrun in winter. Hearthfall again, changed by exactly what you did. The final gate. The three endings. | M08–M09 (2D) · M14 (3D) |
+| **I — Welcome Home** | Arrival, Mayor briefing, sibling's trail, first town choices | M04–M06 (2D) · M14 (3D) |
+| **II — What Keeps Us Safe** | Mine investigation, creature encounters, the bargain revealed | M05–M09 (2D) · M12–M14 (3D) |
+| **III — The Last Night** | Prepare the town, confront Vale and the Guest, choose the town's future | M08–M09 (2D) · M14 (3D) |
 
-## 10. Scope guardrails
+## 10. Combat scope
 
-**In:** one hub, one road, one keep · 4–6 major branching choices · 3 endings · light/heavy/dodge/stamina/lock-on · 2–3 enemy types · save/load with choice history · dialogue UI with portraits · quest log · a handful of Kokoro-voiced lines · full game shell.
+Combat supports the mystery; it is not a progression system.
 
-**Out, deliberately, and do not relitigate this in December:** open world · full voice acting · crafting · inventory economy · survival stats · mounts · day/night simulation · romance · a fourth ending · "just one more area."
+- one improvised melee attack
+- one dodge
+- one creature archetype with two data-tuned variants
+- health, damage, windup, recovery, and clear hit feedback
+- two or three short mandatory encounters in the entire game
 
-## 11. Your homework
+No stamina, combo chain, heavy attack, lock-on mode, weapon inventory, skill tree, loot, boss phases, or combat upgrades. In 3D, generous aim assist turns the character toward the nearest visible threat before an attack.
 
-Fill these in as you go — buffer days are for this. The systems don't care what you write, only that something is written by the day the milestone needs it.
+## 11. Scope guardrails
 
-- [ ] **Rename the game**, or decide `Hearthfall` stays. (by M02)
-- [ ] **The father's specific pride** — what exact thing will he not do, and why? This is Ending B's load-bearing beam. (by M05)
-- [ ] **Vance's best argument** — write the actual paragraph where he explains the Assize. If it doesn't convince *you*, rewrite it. (by M05)
-- [ ] **The four lines of Enid's third letter**, corrupt version. (by M06)
-- [ ] **Ending B's final image.** What is the last thing on screen? (by M08)
-- [ ] **The other 3–4 minor choices** that aren't the Three Ledgers — smaller, more personal, less costly. (by M06)
-- [ ] **Ten lines of Bran's dialogue.** If he's funny, the whole middle of the game works. (by M07)
+**In:** one hub, one road, one mine · 4 major choices · exactly 3 endings · simple attack and dodge · one enemy archetype · save/load with decision history · dialogue UI with portraits · short journal · limited voiced lines · full game shell.
+
+**Out:** open world · medieval kingdom · elaborate combat · inventory economy · crafting · romance · full voice acting · procedural levels · a fourth ending · another town.
+
+## 12. Narrative homework
+
+- [ ] Decide whether `Last Stop, Hollowbrook` stays as the title. (by M02)
+- [ ] Write Mayor Vale's complete opening briefing and five interruption responses. (by M04)
+- [ ] Decide exactly why Eli entered the mine alone. (by M05)
+- [ ] Write the Guest's best argument for preserving the bargain. (by M05)
+- [ ] Decide the personal cost Mayor Vale already paid to become keeper. (by M06)
+- [ ] Write the final images for both full-story endings. (by M08)
+- [ ] Write the deadpan statistics and final title card for Ending C. (by M08)

@@ -103,3 +103,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `46a1980` (`feat: 2d project setup with sprites and sorting layers`)
 **Felt:** Fiddly while choosing grass and diagnosing the pivot, but the visible failures made the 2D conventions concrete.
+
+### Re-plan — 2026-09-16 — End goal — Last Stop, Hollowbrook
+
+**Built:** Replaced the medieval action-RPG destination with a modern supernatural-town choice RPG: two fully developed story endings, one first-playthrough secret ending where Mayor Vale escalates from annoyance to ejection for repeated dialogue skipping, and simple attack-and-dodge combat against one creature archetype.
+**Broke:** The original premise was embedded throughout the milestone briefs rather than isolated to the story bible; retargeted all 16 milestones while preserving all 112 day numbers and the Unity learning sequence.
+**Learned:** The dialogue-skip joke needs to be a tested Core rule with accessibility and repeat-playthrough exemptions, not a late presentation trick.
+**Criteria:** Story bible, curriculum, and milestone consistency checks passed; Day 9 remains current.
+**Commit:** `docs: retarget curriculum to Last Stop Hollowbrook`
+**Felt:** The project now sounds like the game I actually want to finish.

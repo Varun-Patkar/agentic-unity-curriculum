@@ -1,19 +1,19 @@
 # M02 · Movement & Feel
 
-**Days 15–21 · 24–30 Sep 2026 · project: `D:\Projects\Unity Games\Hearthfall`**
+**Days 15–21 · 24–30 Sep 2026 · project: `D:\Projects\Unity Games\Hollowbrook`**
 
 > **This is the real one.** Everything you write from today survives to December. Delete `Sandbox00` — you don't need it any more, and deleting it is a small ceremony worth performing.
 >
 > The goal this week is unglamorous and enormously important: a character who moves *well*, in a place that exists, with a camera that doesn't annoy you. Player movement is the thing your player does for ten straight hours. If it feels bad, nothing else you build can save it.
 
-**You end holding:** your peasant, walking around Hearthfall, with a camera that behaves.
+**You end holding:** Alex, walking around Hollowbrook's town square, with a camera that behaves.
 
 ---
 
 ## Day 15 — Project setup, done right
 **Thu 24 Sep · 60 min**
 
-**Objective:** `Hearthfall` exists, is on git, has a folder structure you won't fight, and has one sprite in it.
+**Objective:** `Hollowbrook` exists, is on git, has a folder structure you won't fight, and has one sprite in it.
 
 **Why:** You'll live here for 97 days. An hour spent on conventions today is worth ten hours in November. It's also the single most boring day of the curriculum, so let's do it properly and never think about it again.
 
@@ -25,7 +25,7 @@
 - **Folder naming with `_Project`** keeps your work above imported packages alphabetically. Small thing, constant payoff.
 
 ### Build (40 min)
-1. New project, **Universal 2D**, at `D:\Projects\Unity Games\Hearthfall`.
+1. New project, **Universal 2D**, at `D:\Projects\Unity Games\Hollowbrook`.
 2. `git init`. Write `.gitignore` (Unity's official template is a good base). Verify `.meta` files are **not** ignored — this is the mistake that costs a weekend.
 3. Create the folder structure:
    ```
@@ -37,11 +37,11 @@
      Input/  Materials/  Prefabs/  Scenes/  Settings/
    ```
 4. `Project Settings > Editor`: confirm Force Text and Visible Meta Files.
-5. Create `Assets/_Project/Scenes/Hearthfall_Village.unity` and make it your working scene.
+5. Create `Assets/_Project/Scenes/Hollowbrook_TownSquare.unity` and make it your working scene.
 6. Import the Input System package and set Active Input Handling to the new one (restart when prompted). Do it now so you never have to again.
-7. Drop in a placeholder peasant sprite. PPU 32 (or 16 — decide now, write it in a `CONVENTIONS.md` in the project, never change it).
+7. Drop in a placeholder sprite for Alex Reed. PPU 32 (or 16 — decide now, write it in a `CONVENTIONS.md` in the project, never change it).
 8. Create `ATTRIBUTIONS.md` in the project root. Add your first asset to it. Start this habit on day one; reconstructing it in December is genuinely miserable.
-9. **First commit:** `chore: initial hearthfall project setup`.
+9. **First commit:** `chore: initial hollowbrook project setup`.
 
 ### Acceptance criteria
 - [ ] Project opens clean, no Console errors
@@ -59,7 +59,7 @@
 
 **Stretch:** Set up a GitHub remote (private). A repo that exists in exactly one place on one drive is a repo you can lose.
 
-**Commit:** `chore: initial hearthfall project setup`
+**Commit:** `chore: initial hollowbrook project setup`
 
 ---
 
@@ -68,13 +68,13 @@
 
 **Objective:** A `PlayerControls` asset with three action maps — `Gameplay`, `Dialogue`, `UI` — and code that switches between them.
 
-**Why:** Context switching is the part everyone skips and everyone regrets. When you're in a conversation on Day 34, WASD must not move the peasant. Building maps now means that's already solved.
+**Why:** Context switching is the part everyone skips and everyone regrets. When you're in a conversation on Day 34, WASD must not move Alex. Building maps now means that's already solved.
 
 ### Concepts (10 min)
 - **Action maps are contexts**, and only one (or a deliberate few) should be enabled at a time. This is the whole reason the system exists.
 - **`Move` in `Gameplay` and `Navigate` in `Dialogue` can share the same physical keys** and mean different things. That's the abstraction working.
-- **Generated C# class vs `PlayerInput` component.** The generated class gives explicit control over enabling/disabling maps, which is what you want here. Prefer it for Hearthfall.
-- **Interactions and Processors** — Hold, Tap, MultiTap; Invert, Normalize, Scale. You'll want `Hold` for heavy attacks on Day 86.
+- **Generated C# class vs `PlayerInput` component.** The generated class gives explicit control over enabling/disabling maps, which is what you want here. Prefer it for Hollowbrook.
+- **Interactions and Processors** — Tap, MultiTap; Invert, Normalize, Scale. Use them only when an action's meaning requires them.
 
 ### Build (40 min)
 1. Create `Assets/_Project/Input/PlayerControls.inputactions`. Tick **Generate C# Class**.
@@ -83,7 +83,7 @@
 4. **UI map:** leave mostly to Unity's defaults for now.
 5. Write `InputRouter.cs` — a single class owning the generated controls instance, with `EnableGameplay()`, `EnableDialogue()`, `EnableUI()`, each disabling the others. **Everything in the game asks this one class**; nothing else touches the input asset.
 6. Wire `Move` into a temporary movement script and prove it works.
-7. Prove the switching: bind a key to toggle to the Dialogue map and confirm WASD stops moving the peasant.
+7. Prove the switching: bind a key to toggle to the Dialogue map and confirm WASD stops moving Alex.
 8. Add `[SerializeField]` nothing here — this is a plain class, and that's deliberate.
 
 ### Acceptance criteria
@@ -98,7 +98,7 @@
 - **Input keeps firing after switching** → you cached a callback reference; unsubscribe on disable.
 - **Generated class is missing** → tick Generate C# Class and hit Apply on the asset.
 
-**Stretch:** Add a `Hold` interaction to `Attack` with a 0.3s threshold and log light vs heavy. That's Day 86's mechanic, prototyped in four minutes.
+**Stretch:** Add a second keyboard binding for `Interact`, then verify both bindings drive the same action without code changes.
 
 **Commit:** `feat: input action maps with context routing`
 
@@ -119,10 +119,10 @@
 - **Tuning by feel, not by theory.** Change the number in Play Mode, play for 30 seconds, change it again. Do not calculate.
 
 ### Build (40 min)
-1. `PlayerMovement.cs` on the peasant, with a `Rigidbody2D` (Gravity Scale 0, Freeze Rotation Z, Interpolate **on** — interpolation smooths physics-rate movement to frame rate and is the difference between smooth and subtly juddery).
+1. `PlayerMovement.cs` on Alex, with a `Rigidbody2D` (Gravity Scale 0, Freeze Rotation Z, Interpolate **on** — interpolation smooths physics-rate movement to frame rate and is the difference between smooth and subtly juddery).
 2. Serialized fields: `_maxSpeed`, `_acceleration`, `_deceleration`. Read input in `Update`, apply in `FixedUpdate`, `Vector2.MoveTowards` the current velocity toward the target.
 3. Normalise the input vector.
-4. **Tune in Play Mode.** Spend a genuine ten minutes on this. Try max speed 3, 5, 8. Try instant accel vs slow. Find what makes *your* peasant feel like a tired man on a road rather than a spaceship.
+4. **Tune in Play Mode.** Spend a genuine ten minutes on this. Try max speed 3, 5, 8. Try instant accel vs slow. Find what makes Alex feel grounded rather than like a spaceship.
 5. Track a `FacingDirection` — you need it for interaction (Day 34) and attacks (Day 51). Store the last non-zero input direction.
 6. Add a simple sprite flip or four-direction sprite swap so facing is visible.
 7. **Write the final numbers into `CONVENTIONS.md`** so a future you doesn't wonder why 4.7.
@@ -146,12 +146,12 @@
 
 ---
 
-## Day 18 — Tilemaps: painting Hearthfall
+## Day 18 — Tilemaps: painting Hollowbrook
 **Sun 27 Sep · 60 min**
 
-**Objective:** A recognisable village — paths, grass, buildings, a boundary — painted rather than assembled from individual sprites.
+**Objective:** A recognisable town square — pavement, roads, storefronts, trees, and a boundary — painted rather than assembled from individual sprites.
 
-**Why:** Hand-placing sprites doesn't scale past about thirty of them. Tilemaps are how 2D worlds are actually built, and today Hearthfall becomes a place instead of a concept.
+**Why:** Hand-placing sprites doesn't scale past about thirty of them. Tilemaps are how 2D worlds are actually built, and today Hollowbrook becomes a place instead of a concept.
 
 ### Concepts (10 min)
 - **Grid → Tilemap → Tile.** The Grid defines cell size, the Tilemap holds placements, Tiles are assets referencing sprites.
@@ -161,18 +161,18 @@
 - **Tilemap Collider 2D + Composite Collider 2D** — the composite merges thousands of tile colliders into a few polygons. Massive performance difference, and without it collisions catch on invisible tile seams.
 
 ### Build (40 min)
-1. Get a tileset. Kenney's medieval/RPG packs, an itch.io CC0 pack, or your own — 16×16 or 32×32, matching your PPU. Log it in `ATTRIBUTIONS.md`.
+1. Get a modern small-town tileset from a CC0 source or make a tiny placeholder set — 16×16 or 32×32, matching your PPU. Log it in `ATTRIBUTIONS.md`.
 2. Slice it: Sprite Mode **Multiple**, Sprite Editor → Slice → Grid By Cell Size.
 3. `GameObject > 2D Object > Tilemap > Rectangular`. Add four child tilemaps: `Ground` (order 0), `Detail` (1), `Obstacles` (2), `Above` (10).
 4. Open the Tile Palette, create a palette, drag your sliced sprites in.
-5. **Paint Hearthfall.** Not the whole village — one screen's worth. Grass, a dirt path, a couple of building footprints, a treeline boundary. Twenty minutes, no perfectionism.
+5. **Paint Hollowbrook's Town Square.** Not the whole town — one screen's worth. Pavement, a road, Town Hall and diner footprints, parked-car shapes, and a treeline boundary. Twenty minutes, no perfectionism.
 6. Add `Tilemap Collider 2D` + `Composite Collider 2D` (Used By Composite ✓ on the tilemap collider, Rigidbody2D set to **Static**) on `Obstacles`.
 7. Walk around. Bump into things. Fix the places where collision feels wrong.
 8. Install **2D Tilemap Extras** and convert your path to a Rule Tile if time allows.
 
 ### Acceptance criteria
 - [ ] Four-layer tilemap structure with sensible sorting orders
-- [ ] A screen of Hearthfall exists and reads as a village
+- [ ] A screen of Hollowbrook exists and reads as a modern town square
 - [ ] Obstacles block the player via a Composite Collider
 - [ ] You can paint new tiles in under ten seconds
 - [ ] Tileset logged in `ATTRIBUTIONS.md`
@@ -185,7 +185,7 @@
 
 **Stretch:** Add a `Above` layer for tree canopies the player walks behind, at a sorting order above the player. It's the cheapest possible depth illusion and it looks great.
 
-**Commit:** `feat: hearthfall village tilemap with collision`
+**Commit:** `feat: hollowbrook town square tilemap with collision`
 
 ---
 
@@ -234,7 +234,7 @@
 ## Day 20 — Cinemachine: a camera that doesn't annoy you
 **Tue 29 Sep · 60 min**
 
-**Objective:** A camera that follows the peasant smoothly, has a dead zone, and never shows the void beyond the map edge.
+**Objective:** A camera that follows Alex smoothly, has a dead zone, and never shows the void beyond the map edge.
 
 **Why:** A bad camera makes good movement feel bad. This is one hour that improves every subsequent hour of the project.
 
@@ -249,8 +249,8 @@
 1. Install **Cinemachine** from the Package Manager. *(Verify the current version and component names — Cinemachine 3.x renamed several things from 2.x. Have your agent check rather than guess.)*
 2. Add a Cinemachine Camera to the scene, set Follow to the player. Note the brain component that appears on the Main Camera.
 3. Configure the framing: set a **dead zone** and tune **damping**. Play, walk around, adjust in Play Mode.
-4. Add a **Confiner 2D** with a Polygon Collider 2D drawn around your village bounds. Walk to the edge; the camera should stop while the player keeps going.
-5. Set the orthographic size to frame the village well. Consider a **Pixel Perfect Camera** component if you're using pixel art — it eliminates shimmer, at the cost of some camera-smoothness flexibility. Decide deliberately.
+4. Add a **Confiner 2D** with a Polygon Collider 2D drawn around the Town Square bounds. Walk to the edge; the camera should stop while the player keeps going.
+5. Set the orthographic size to frame the square well. Consider a **Pixel Perfect Camera** component if you're using pixel art — it eliminates shimmer, at the cost of some camera-smoothness flexibility. Decide deliberately.
 6. **Screenshake infrastructure:** add a Cinemachine Impulse Source to the player and an Impulse Listener on the camera. Trigger it on a keypress to test. You'll use this constantly from M07 onward, so build the plumbing now.
 7. Play for five minutes. Adjust until you stop noticing the camera. That's the goal — a camera you notice is a camera that's wrong.
 
@@ -278,8 +278,8 @@
 
 - **Catch up** on anything unfinished.
 - **Polish the feel.** Go back to Day 17's numbers. Play for 15 minutes and tune. This is never wasted time.
-- **Paint more of Hearthfall.** Purely enjoyable, genuinely useful.
-- **Story homework:** decide whether the game stays named `Hearthfall`. It's on the checklist in `reference/story-bible.md` and today's a good day for it.
+- **Paint more of Hollowbrook.** Purely enjoyable, genuinely useful.
+- **Story homework:** confirm whether `Last Stop, Hollowbrook` stays as the title. Record the decision in `reference/story-bible.md`.
 - **Rest.**
 
 ### Milestone review
