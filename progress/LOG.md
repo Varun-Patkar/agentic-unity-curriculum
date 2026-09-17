@@ -121,3 +121,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed; gamepad support was verified structurally because no controller was available.
 **Commit:** `c96e592` (`feat: input system driven player movement`)
 **Felt:** Cool to see Unity handle continuous input instead of manually moving something once per key press.
+
+### Day 10 — 2026-09-17 — M01 — The loop: spawn, collect, score
+
+**Built:** Turned the chicken into a trigger prefab, spawned three at varied positions away from the player, collected them through collision, scored through an event subscriber, spawned replacements through a second subscriber, and ended movement after a 60-second timer.
+**Broke:** The timer initially checked for exact zero, which frame time can skip; changed the condition to `<= 0`. The event-driven split was initially introduced too quickly, then made concrete as one publisher with independent score and spawn subscribers.
+**Learned:** A pickup can publish one fact without knowing its consumers; the manager scores it and the spawner replaces it independently, with subscriptions paired in `OnEnable` and `OnDisable`.
+**Criteria:** 5/5 passed
+**Commit:** `29b64ce` (`feat: collect loop with score and timer`)
+**Felt:** The message-passing model clicked once collecting a chicken visibly caused both scoring and respawning.

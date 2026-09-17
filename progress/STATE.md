@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 10
+day: 11
 date_of_day_1: 2026-09-09
-last_session: 2026-09-16
+last_session: 2026-09-17
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M01
 milestone_title: First Blood — A Complete Tiny Game
-milestone_day: 3        # 1-6 = content, 7 = buffer
+milestone_day: 4        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\ChickenChase
 unity_version: 6000.6.0f1
@@ -46,6 +46,8 @@ status: ready
 - Every entity has a `BoxCollider2D`, and Play Mode runs without Console errors.
 - The post-M01 curriculum now targets *Last Stop, Hollowbrook*: a modern supernatural choice RPG with two full-story endings, one first-playthrough dialogue-skip ending, and deliberately simple combat.
 - The peasant moves smoothly at speed 5 through a `Rigidbody2D`, using one `Move` action bound to normalized WASD and the gamepad left stick with no legacy input calls.
+- Three collectible chicken prefabs spawn at varied positions away from the player, score exactly once through an event, and immediately respawn elsewhere.
+- A 60-second game timer logs game over and disables player movement when it expires; event subscriptions are paired with unsubscriptions.
 
 ## What is broken
 
@@ -55,11 +57,13 @@ status: ready
 
 Things noticed but deliberately deferred. Revisit on buffer days.
 
-- [D8] Chicken collider bounds are generous; tune them when collection behavior arrives on Day 10.
+- [D8] Chicken trigger bounds remain generous; tune them on a buffer day.
+- [D10] The player can leave the visible map; preventing this is the highest-value gameplay improvement.
+- [D10] Randomly spawned chickens can overlap; add spacing only as a later polish task.
 
 ## Next action
 
-**Day 10** — turn chickens into collectible triggers, spawn them at varied positions, and add score and timer state through events.
+**Day 11** — add resolution-aware score, timer, and game-over UI with a restart button.
 
 ---
 
