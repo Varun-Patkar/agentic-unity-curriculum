@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 11
+day: 12
 date_of_day_1: 2026-09-09
-last_session: 2026-09-17
+last_session: 2026-09-18
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M01
 milestone_title: First Blood — A Complete Tiny Game
-milestone_day: 4        # 1-6 = content, 7 = buffer
+milestone_day: 5        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\ChickenChase
 unity_version: 6000.6.0f1
@@ -48,6 +48,7 @@ status: ready
 - The peasant moves smoothly at speed 5 through a `Rigidbody2D`, using one `Move` action bound to normalized WASD and the gamepad left stick with no legacy input calls.
 - Three collectible chicken prefabs spawn at varied positions away from the player, score exactly once through an event, and immediately respawn elsewhere.
 - A 60-second game timer logs game over and disables player movement when it expires; event subscriptions are paired with unsubscriptions.
+- A resolution-aware HUD shows event-driven score and countdown updates; game over reveals the final score and a Restart button that starts a clean run.
 
 ## What is broken
 
@@ -63,7 +64,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 11** — add resolution-aware score, timer, and game-over UI with a restart button.
+**Day 12** — add pitch-varied collect audio, particles, subtle screenshake, and collection animation.
 
 ---
 

@@ -130,3 +130,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `29b64ce` (`feat: collect loop with score and timer`)
 **Felt:** The message-passing model clicked once collecting a chicken visibly caused both scoring and respawning.
+
+### Day 11 — 2026-09-18 — M01 — UI: score, timer, game over
+
+**Built:** Added a resolution-aware Canvas HUD with event-driven score and countdown text, plus a game-over overlay showing the final score and a Restart button that reloads a clean run.
+**Broke:** Nothing. A five-second test duration made the game-over loop quick to verify before restoring the intended 60 seconds.
+**Learned:** UI can subscribe to game-state events instead of polling every frame; anchors keep RectTransforms screen-relative as aspect ratios change.
+**Criteria:** 5/5 passed
+**Commit:** `3f65280` (`feat: score/timer hud and game over screen`)
+**Felt:** Nice to revisit UI.
