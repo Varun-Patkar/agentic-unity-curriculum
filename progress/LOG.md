@@ -139,3 +139,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `3f65280` (`feat: score/timer hud and game over screen`)
 **Felt:** Nice to revisit UI.
+
+### Day 12 — 2026-09-19 — M01 — Juice: sound, particles, screenshake
+
+**Built:** Added a pitch-varied chicken collect call, a self-cleaning collection particle burst, subtle decaying screenshake, score-text punch, chicken squash-to-zero animation, final-ten-second ticks, one-shot game-over audio, and alternating footsteps tuned to a 0.5-second interval.
+**Broke:** The first chicken audio cut included an unwanted chirp and was recut to retain the middle and elegant final call. Footsteps initially continued after game over because disabled movement retained stale input; `IsMoving` now also requires the component to be active and enabled.
+**Learned:** Small feedback layers make unchanged mechanics feel responsive; coroutines spread short animations across frames, while cached base transforms prevent shake drift.
+**Criteria:** 5/5 passed
+**Commit:** `6adc2d6` (`feat: audio, particles, and screenshake`)
+**Felt:** The varied chicken call sounded natural, and the complete feedback stack made much more sense in motion.

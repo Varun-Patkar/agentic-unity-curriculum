@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 12
+day: 13
 date_of_day_1: 2026-09-09
-last_session: 2026-09-18
+last_session: 2026-09-19
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M01
 milestone_title: First Blood — A Complete Tiny Game
-milestone_day: 5        # 1-6 = content, 7 = buffer
+milestone_day: 6        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\ChickenChase
 unity_version: 6000.6.0f1
@@ -49,6 +49,8 @@ status: ready
 - Three collectible chicken prefabs spawn at varied positions away from the player, score exactly once through an event, and immediately respawn elsewhere.
 - A 60-second game timer logs game over and disables player movement when it expires; event subscriptions are paired with unsubscriptions.
 - A resolution-aware HUD shows event-driven score and countdown updates; game over reveals the final score and a Restart button that starts a clean run.
+- Chicken collection now combines pitch-varied audio, a self-cleaning particle burst, subtle decaying screenshake, score-text punch, and squash-to-zero animation.
+- Alternating footsteps play only while movement is enabled; the final ten seconds tick down and game over plays once.
 
 ## What is broken
 
@@ -61,10 +63,11 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 - [D8] Chicken trigger bounds remain generous; tune them on a buffer day.
 - [D10] The player can leave the visible map; preventing this is the highest-value gameplay improvement.
 - [D10] Randomly spawned chickens can overlap; add spacing only as a later polish task.
+- [D12] Audio source URLs, authors, and licences are unknown; verify `ATTRIBUTIONS.md` before distribution.
 
 ## Next action
 
-**Day 12** — add pitch-varied collect audio, particles, subtle screenshake, and collection animation.
+**Day 13** — add menus and scene flow, then make a real build.
 
 ---
 
