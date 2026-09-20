@@ -148,3 +148,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `6adc2d6` (`feat: audio, particles, and screenshake`)
 **Felt:** The varied chicken call sounded natural, and the complete feedback stack made much more sense in motion.
+
+### Day 13 — 2026-09-20 — M01 — Menus, scene flow, and a real build
+
+**Built:** Added a title scene with Play and Quit, registered MainMenu and Game in the Windows Build Profile, added game-over navigation back to the title, and implemented an Escape/Resume pause menu that stops the timer, movement, and footsteps. Built, tested on a second PC without Unity, and zipped the 1280x720 windowed Windows release.
+**Broke:** The first pause implementation toggled the game-over panel and omitted `Time.timeScale`; after fixing both, movement input could still trigger footsteps while paused, so the audio update now explicitly ignores paused time.
+**Learned:** Scene loading destroys scene-owned state, Build Profiles define the executable entry point, and `Time.timeScale = 0` stops scaled simulation but does not stop `Update` or input callbacks.
+**Criteria:** 5/5 passed
+**Commit:** `52b7236` (`feat: menus, scene flow, and v1 build`)
+**Felt:** Great. A full game was created by me.

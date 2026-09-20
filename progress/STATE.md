@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 13
+day: 14
 date_of_day_1: 2026-09-09
-last_session: 2026-09-19
+last_session: 2026-09-20
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M01
 milestone_title: First Blood — A Complete Tiny Game
-milestone_day: 6        # 1-6 = content, 7 = buffer
+milestone_day: 7        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\ChickenChase
 unity_version: 6000.6.0f1
@@ -51,6 +51,8 @@ status: ready
 - A resolution-aware HUD shows event-driven score and countdown updates; game over reveals the final score and a Restart button that starts a clean run.
 - Chicken collection now combines pitch-varied audio, a self-cleaning particle burst, subtle decaying screenshake, score-text punch, and squash-to-zero animation.
 - Alternating footsteps play only while movement is enabled; the final ten seconds tick down and game over plays once.
+- A title menu starts the game and quits the Windows build; game over can return to the title, and Escape/Resume pauses the timer, movement, and footsteps.
+- `MainMenu` and `Game` are registered in that order in the Windows Build Profile; the 1280x720 windowed build passed the full flow on a second PC without Unity and is stored as a ZIP.
 
 ## What is broken
 
@@ -67,7 +69,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 13** — add menus and scene flow, then make a real build.
+**Day 14 BUFFER** — choose catch up, polish, explore, or rest; give the completed build to one human.
 
 ---
 
