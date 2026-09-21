@@ -157,3 +157,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `52b7236` (`feat: menus, scene flow, and v1 build`)
 **Felt:** Great. A full game was created by me.
+
+### Day 14 — 2026-09-21 — BUFFER — polish
+
+**Built:** Added four screen-relative collider walls that keep the player inside the orthographic camera view, and updated chicken spawning to maintain configurable separation from the player and other live chickens with bounded retries.
+**Broke:** The boundary parent initially had a large world-space offset; after resetting it, the bottom wall faced inward and the side-wall width and height calculations were swapped. The chicken distance calculation also needed an explicit `Vector3`-to-`Vector2` cast.
+**Learned:** Orthographic camera bounds convert viewport constraints into world-space colliders, while randomized placement needs candidate validation and a finite retry budget.
+**Criteria:** 2/2 passed
+**Commit:** `35f25c8` (`fix: constrain player and chicken spawns`)
+**Felt:** Two lingering gameplay annoyances are now gone.

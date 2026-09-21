@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 14
+day: 15
 date_of_day_1: 2026-09-09
-last_session: 2026-09-20
+last_session: 2026-09-21
 days_missed_total: 0
 projected_end: 2026-12-29
 
-milestone: M01
-milestone_title: First Blood — A Complete Tiny Game
-milestone_day: 7        # 1-6 = content, 7 = buffer
+milestone: M02
+milestone_title: Movement & Feel
+milestone_day: 1        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\ChickenChase
 unity_version: 6000.6.0f1
@@ -53,6 +53,8 @@ status: ready
 - Alternating footsteps play only while movement is enabled; the final ten seconds tick down and game over plays once.
 - A title menu starts the game and quits the Windows build; game over can return to the title, and Escape/Resume pauses the timer, movement, and footsteps.
 - `MainMenu` and `Game` are registered in that order in the Windows Build Profile; the 1280x720 windowed build passed the full flow on a second PC without Unity and is stored as a ZIP.
+- Screen-relative collider walls keep the player inside the orthographic camera view at different aspect ratios.
+- Chicken spawning keeps a configurable minimum distance from the player and other live chickens, with a bounded retry count.
 
 ## What is broken
 
@@ -63,13 +65,11 @@ status: ready
 Things noticed but deliberately deferred. Revisit on buffer days.
 
 - [D8] Chicken trigger bounds remain generous; tune them on a buffer day.
-- [D10] The player can leave the visible map; preventing this is the highest-value gameplay improvement.
-- [D10] Randomly spawned chickens can overlap; add spacing only as a later polish task.
 - [D12] Audio source URLs, authors, and licences are unknown; verify `ATTRIBUTIONS.md` before distribution.
 
 ## Next action
 
-**Day 14 BUFFER** — choose catch up, polish, explore, or rest; give the completed build to one human.
+**Day 15** — create the durable Hollowbrook project using the setup and repository conventions in M02.
 
 ---
 
