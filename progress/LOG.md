@@ -166,3 +166,12 @@ Took it. Streak intact.
 **Criteria:** 2/2 passed
 **Commit:** `35f25c8` (`fix: constrain player and chicken spawns`)
 **Felt:** Two lingering gameplay annoyances are now gone.
+
+### Day 15 — 2026-09-22 — M02 — Project setup, done right
+
+**Built:** Created the durable Universal 2D `Hollowbrook` project with a Unity-aware Git boundary, tracked `.meta` files, the full `_Project` folder structure, Force Text serialization, the new Input System, a saved town-square scene, and a project-owned 32 PPU placeholder for Alex Reed. Documented scale, naming, and attribution conventions from the first asset.
+**Broke:** Changing Alex's import mode from Multiple to Single invalidated the originally dragged sub-sprite; dragging the corrected single sprite back into the scene restored it.
+**Learned:** Unity asset references depend on GUIDs stored in `.meta` files, while `Library/` is generated state; preserving one and ignoring the other is the core Git boundary.
+**Criteria:** 7/7 passed
+**Commit:** `5fe6772` (`chore: initial hollowbrook project setup`)
+**Felt:** Not artsy, but Alex is recognizably standing in the real project and the foundation is clean.

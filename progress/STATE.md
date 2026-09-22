@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 15
+day: 16
 date_of_day_1: 2026-09-09
-last_session: 2026-09-21
+last_session: 2026-09-22
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M02
 milestone_title: Movement & Feel
-milestone_day: 1        # 1-6 = content, 7 = buffer
+milestone_day: 2        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\ChickenChase
 unity_version: 6000.6.0f1
@@ -55,6 +55,8 @@ status: ready
 - `MainMenu` and `Game` are registered in that order in the Windows Build Profile; the 1280x720 windowed build passed the full flow on a second PC without Unity and is stored as a ZIP.
 - Screen-relative collider walls keep the player inside the orthographic camera view at different aspect ratios.
 - Chicken spawning keeps a configurable minimum distance from the player and other live chickens, with a bounded retry count.
+- `Hollowbrook` is a clean Universal 2D project with a Git boundary, durable `_Project` folder structure, Force Text serialization, visible tracked `.meta` files, and the new Input System active.
+- `Hollowbrook_TownSquare` opens without Console errors and contains a 32 PPU project-owned placeholder sprite for Alex Reed; project conventions and asset attribution are documented.
 
 ## What is broken
 
@@ -69,7 +71,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 15** — create the durable Hollowbrook project using the setup and repository conventions in M02.
+**Day 16** — create the three `PlayerControls` action maps and route gameplay, dialogue, and UI input contexts through one plain C# owner.
 
 ---
 
