@@ -13,7 +13,7 @@ milestone: M02
 milestone_title: Movement & Feel
 milestone_day: 2        # 1-6 = content, 7 = buffer
 
-active_project: D:\Projects\Unity Games\ChickenChase
+active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
 render_pipeline: URP
 
