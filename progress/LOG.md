@@ -175,3 +175,12 @@ Took it. Streak intact.
 **Criteria:** 7/7 passed
 **Commit:** `5fe6772` (`chore: initial hollowbrook project setup`)
 **Felt:** Not artsy, but Alex is recognizably standing in the real project and the foundation is clean.
+
+### Day 16 — 2026-09-23 — M02 — Input Actions for a real game
+
+**Built:** Created Gameplay, Dialogue, and empty-for-now UI maps with keyboard and gamepad bindings and generated C# controls. Wrote a plain C# router that switches contexts; a temporary Rigidbody2D movement component moves Alex at equal cardinal and diagonal speed. J enters Dialogue and stops movement; Escape restores Gameplay movement.
+**Broke:** Diagonal movement was initially faster; clamping input magnitude to one fixed it. No Console errors at the end.
+**Learned:** Action maps separate physical keys from context-specific intent; one router owns map lifetime while the Unity component owns movement.
+**Criteria:** 5/5 passed; gamepad bindings verified structurally, not with a physical controller.
+**Commit:** `92b6c54` (`feat: input action maps with context routing`)
+**Felt:** Good; compartmentalizing responsibilities made the pieces feel separate and clear.

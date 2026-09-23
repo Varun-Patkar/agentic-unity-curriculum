@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 16
+day: 17
 date_of_day_1: 2026-09-09
-last_session: 2026-09-22
+last_session: 2026-09-23
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M02
 milestone_title: Movement & Feel
-milestone_day: 2        # 1-6 = content, 7 = buffer
+milestone_day: 3        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
@@ -57,6 +57,8 @@ status: ready
 - Chicken spawning keeps a configurable minimum distance from the player and other live chickens, with a bounded retry count.
 - `Hollowbrook` is a clean Universal 2D project with a Git boundary, durable `_Project` folder structure, Force Text serialization, visible tracked `.meta` files, and the new Input System active.
 - `Hollowbrook_TownSquare` opens without Console errors and contains a 32 PPU project-owned placeholder sprite for Alex Reed; project conventions and asset attribution are documented.
+- `PlayerControls` has Gameplay, Dialogue, and empty-for-now UI action maps, with keyboard and gamepad bindings and a committed generated C# class.
+- Plain C# `InputRouter` owns map switching; a temporary Rigidbody2D movement component moves Alex at equal cardinal and diagonal speed. J switches to Dialogue and stops movement; Escape returns to Gameplay and restores it.
 
 ## What is broken
 
@@ -71,7 +73,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 16** — create the three `PlayerControls` action maps and route gameplay, dialogue, and UI input contexts through one plain C# owner.
+**Day 17** — replace the temporary movement component with a tuned top-down controller: acceleration, deceleration, visible facing, and Rigidbody2D interpolation.
 
 ---
 

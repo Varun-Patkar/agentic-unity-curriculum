@@ -123,3 +123,7 @@ Unity and gamedev vocabulary, defined for someone who already writes software. S
 ---
 
 <!-- Agents: append new terms below, format: **Term** — definition. *(D42)* -->
+
+**Action map** — a named input context whose enabled actions respond to their bindings; switching maps changes what the same key means. *(D16)*
+
+**Generated input class** — the C# wrapper Unity regenerates from an `.inputactions` asset, exposing named maps and actions without string lookups. Do not edit it by hand. *(D16)*
