@@ -184,3 +184,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed; gamepad bindings verified structurally, not with a physical controller.
 **Commit:** `92b6c54` (`feat: input action maps with context routing`)
 **Felt:** Good; compartmentalizing responsibilities made the pieces feel separate and clear.
+
+### Day 17 — 2026-09-24 — M02 — A top-down controller that feels good
+
+**Built:** Renamed the temporary movement script to `PlayerMovement`; Alex now accelerates and decelerates through Rigidbody2D velocity, retains the last non-zero facing direction, visibly flips left/right, and uses Rigidbody2D interpolation. Gameplay-to-Dialogue switching still stops movement; Escape restores it. Chose speed 5, acceleration 20, deceleration 30.
+**Broke:** Nothing reported. The script's `.meta` GUID survived the rename and the scene reference remains intact.
+**Learned:** Sample input per frame, approach target velocity on the physics tick, and interpolate the Rigidbody for smooth rendering between ticks.
+**Criteria:** 4/5 confirmed; played roughly 5-10 minutes, so the minimum ten-minute tuning criterion is not confirmed.
+**Commit:** `d676b20` (`feat: tuned top-down player controller`)
+**Felt:** The default tuning felt good; Alex now starts and stops gradually.

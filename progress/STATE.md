@@ -5,7 +5,7 @@
 ```yaml
 day: 17
 date_of_day_1: 2026-09-09
-last_session: 2026-09-23
+last_session: 2026-09-24
 days_missed_total: 0
 projected_end: 2026-12-29
 
@@ -17,7 +17,7 @@ active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
 render_pipeline: URP
 
-status: ready
+status: tuning_check_pending
 ```
 
 ## What exists
@@ -59,10 +59,11 @@ status: ready
 - `Hollowbrook_TownSquare` opens without Console errors and contains a 32 PPU project-owned placeholder sprite for Alex Reed; project conventions and asset attribution are documented.
 - `PlayerControls` has Gameplay, Dialogue, and empty-for-now UI action maps, with keyboard and gamepad bindings and a committed generated C# class.
 - Plain C# `InputRouter` owns map switching; a temporary Rigidbody2D movement component moves Alex at equal cardinal and diagonal speed. J switches to Dialogue and stops movement; Escape returns to Gameplay and restores it.
+- `PlayerMovement` accelerates to speed 5 at rate 20 and stops at rate 30; last non-zero facing direction is retained, the sprite flips left/right, and Rigidbody2D interpolation is enabled. Dialogue still stops movement.
 
 ## What is broken
 
-*Nothing.*
+- [D17] Ten minutes of actual tuning was not confirmed (estimated 5-10 minutes); gameplay itself works.
 
 ## Parked
 
@@ -73,7 +74,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 17** — replace the temporary movement component with a tuned top-down controller: acceleration, deceleration, visible facing, and Rigidbody2D interpolation.
+**Day 17 closeout** — spend the remaining time to reach ten minutes of movement tuning, confirm no Console errors, then mark 5/5 and advance to Day 18 tilemaps.
 
 ---
 

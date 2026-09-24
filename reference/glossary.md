@@ -34,6 +34,8 @@ Unity and gamedev vocabulary, defined for someone who already writes software. S
 
 **`FixedUpdate`** — fixed timestep (default 50Hz), decoupled from frame rate. All physics goes here.
 
+**Rigidbody2D interpolation (D17)** — renders estimated positions between fixed physics ticks so motion looks smooth at the display's frame rate without changing physics timing.
+
 **Coroutine** — cooperative scheduling via `IEnumerator`. Unity resumes it on a schedule you `yield` for. Not a thread. Dies if its GameObject is disabled.
 
 ---
