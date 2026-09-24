@@ -3,7 +3,7 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 17
+day: 18
 date_of_day_1: 2026-09-09
 last_session: 2026-09-24
 days_missed_total: 0
@@ -11,13 +11,13 @@ projected_end: 2026-12-29
 
 milestone: M02
 milestone_title: Movement & Feel
-milestone_day: 3        # 1-6 = content, 7 = buffer
+milestone_day: 4        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
 render_pipeline: URP
 
-status: tuning_check_pending
+status: ready
 ```
 
 ## What exists
@@ -63,7 +63,7 @@ status: tuning_check_pending
 
 ## What is broken
 
-- [D17] Ten minutes of actual tuning was not confirmed (estimated 5-10 minutes); gameplay itself works.
+*Nothing.*
 
 ## Parked
 
@@ -74,7 +74,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 17 closeout** — spend the remaining time to reach ten minutes of movement tuning, confirm no Console errors, then mark 5/5 and advance to Day 18 tilemaps.
+**Day 18** — paint Hollowbrook's town square with Tilemaps, following the M02 brief.
 
 ---
 

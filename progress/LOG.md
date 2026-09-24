@@ -193,3 +193,5 @@ Took it. Streak intact.
 **Criteria:** 4/5 confirmed; played roughly 5-10 minutes, so the minimum ten-minute tuning criterion is not confirmed.
 **Commit:** `d676b20` (`feat: tuned top-down player controller`)
 **Felt:** The default tuning felt good; Alex now starts and stops gradually.
+
+**Follow-up (2026-09-24):** Played longer after closeout; total tuning time exceeded ten minutes and the default values still felt good. Final criteria: 5/5 passed.
