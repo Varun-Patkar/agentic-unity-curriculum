@@ -37,6 +37,7 @@ The single most common Unity error. In order of likelihood:
 - The class name doesn't match the filename. Unity requires this for MonoBehaviours.
 
 ### "Collisions don't work"
+- Both objects need enabled Colliders: a Rigidbody2D alone has no collision shape. On Day 18 Alex had a Rigidbody2D but no Collider2D and walked through a solid Tilemap Collider 2D.
 - **At least one of the two objects needs a Rigidbody.** Two colliders alone do nothing.
 - `Is Trigger` is checked → `OnTriggerEnter` fires, `OnCollisionEnter` does not.
 - Layers aren't set to collide: `Project Settings > Physics` (or `Physics 2D`) collision matrix.

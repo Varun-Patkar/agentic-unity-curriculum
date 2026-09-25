@@ -195,3 +195,12 @@ Took it. Streak intact.
 **Felt:** The default tuning felt good; Alex now starts and stops gradually.
 
 **Follow-up (2026-09-24):** Played longer after closeout; total tuning time exceeded ten minutes and the default values still felt good. Final criteria: 5/5 passed.
+
+### Day 18 — 2026-09-25 — M02 — Tilemaps: painting Hollowbrook
+
+**Built:** Imported and attributed Kenney's CC0 modern-city tileset, sliced it at 16x16 with one-pixel spacing, and set up a four-layer Tilemap on a half-unit Grid. Painted pavement, a road strip, and a brick block; merged obstacle collision now stops Alex.
+**Broke:** Alex walked through the brick block despite a static composite collider. The Console was clear; inspecting Alex revealed a Rigidbody2D but no Collider2D. Adding a non-trigger Capsule Collider 2D fixed it.
+**Learned:** A Rigidbody2D moves through physics, but each interacting object still needs a Collider2D shape; visible tiles alone do not imply physical contact.
+**Criteria:** 4/5 passed; the layout does not yet read as a modern town square. Finish the visual pass before Day 19.
+**Commit:** `61bbb7e` (`wip: day 18, tilemap collision works; town square unfinished`)
+**Felt:** Painting got boring quickly; the collision diagnosis was a better use of the hour. Tired, stopping on time.

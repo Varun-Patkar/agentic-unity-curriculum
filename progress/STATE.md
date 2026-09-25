@@ -5,7 +5,7 @@
 ```yaml
 day: 18
 date_of_day_1: 2026-09-09
-last_session: 2026-09-24
+last_session: 2026-09-25
 days_missed_total: 0
 projected_end: 2026-12-29
 
@@ -17,7 +17,7 @@ active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
 render_pipeline: URP
 
-status: ready
+status: partial
 ```
 
 ## What exists
@@ -60,10 +60,12 @@ status: ready
 - `PlayerControls` has Gameplay, Dialogue, and empty-for-now UI action maps, with keyboard and gamepad bindings and a committed generated C# class.
 - Plain C# `InputRouter` owns map switching; a temporary Rigidbody2D movement component moves Alex at equal cardinal and diagonal speed. J switches to Dialogue and stops movement; Escape returns to Gameplay and restores it.
 - `PlayerMovement` accelerates to speed 5 at rate 20 and stops at rate 30; last non-zero facing direction is retained, the sprite flips left/right, and Rigidbody2D interpolation is enabled. Dialogue still stops movement.
+- `Hollowbrook_TownSquare` has four tilemaps (`Ground`, `Detail`, `Obstacles`, `Above`) with a Kenney CC0 tileset at 32 PPU on a half-unit Grid; pavement, a road strip, and a brick block are painted.
+- `Obstacles` has a merged Tilemap/Composite Collider 2D on a static Rigidbody2D; Alex's Capsule Collider 2D stops him at the brick block.
 
 ## What is broken
 
-*Nothing.*
+- [D18] The painted area is still a plain test layout; it does not yet read as a modern town square.
 
 ## Parked
 
@@ -74,7 +76,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 18** — paint Hollowbrook's town square with Tilemaps, following the M02 brief.
+**Day 18** — finish one screen of town-square art (town hall and diner footprints, trees, parked-car shapes); then verify the fifth criterion before Day 19.
 
 ---
 
