@@ -63,6 +63,7 @@ status: ready
 - `Hollowbrook_TownSquare` has four tilemaps (`Ground`, `Detail`, `Obstacles`, `Above`) with a Kenney CC0 tileset at 32 PPU on a half-unit Grid; pavement, a road strip, and a brick block are painted.
 - `Obstacles` has a merged Tilemap/Composite Collider 2D on a static Rigidbody2D; Alex's Capsule Collider 2D stops him at the brick block.
 - Day 18's town square now reads as a modern block with distinct Town Hall and diner footprints, a central plaza, solid asphalt with sparse lane markings, parked-car shapes, and a treeline; a reusable Editor painter produced the scene through Unity APIs.
+- The painted building and treeline footprints now generate composite collider outlines and block Alex; his sprite renders above Detail and Obstacles but below Above. Town Hall is a closed footprint, not an interior.
 
 ## What is broken
 

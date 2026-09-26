@@ -213,3 +213,5 @@ Took it. Streak intact.
 **Criteria:** Day 18 now 5/5; existing obstacle collision and quick palette painting were verified on 2026-09-25. Camera follow remains scheduled for Day 20.
 **Commit:** `81b7c2d` (`feat: paint hollowbrook town square`)
 **Felt:** Automation was useful once the visual mistakes were caught in Game view; a fixed camera still feels limiting.
+
+**Follow-up (2026-09-26):** Simplified the remaining plaza trim and moved Alex's sprite order above Ground, Detail, and Obstacles but below Above. The automated painter initially saved before Tilemap Collider 2D processed its new tiles, leaving only the old brick in the Composite Collider. Forcing tilemap changes and regenerating the composite produced multiple saved outline paths; Play Mode confirmed the new building footprints block Alex. The buildings are intentionally closed footprints, not enterable interiors. Fix commit: `021db06`. Day 18 remains 5/5.
