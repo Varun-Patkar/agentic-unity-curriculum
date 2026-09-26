@@ -214,4 +214,13 @@ Took it. Streak intact.
 **Commit:** `81b7c2d` (`feat: paint hollowbrook town square`)
 **Felt:** Automation was useful once the visual mistakes were caught in Game view; a fixed camera still feels limiting.
 
+### Day 19 — 2026-09-26 — M02 — Collision, layers, and the sorting problem
+
+**Built:** Added seven physics layers with an explicit collision matrix, assigned Alex and obstacles, configured URP 2D Y-sorting, moved Alex's sprite pivot to his feet, and split his movement capsule from a larger interaction trigger. An individual test tree proved the draw order flips; it was removed after testing. Documented the scheme in the game project.
+**Broke:** The project Graphics transparency sort setting alone did not change draw order; the active Renderer2D asset was still in its default mode. Setting Custom Axis there fixed it. The painted treeline remains tilemap art and is not an individual Y-sorted tree.
+**Learned:** Physics Layers, Sorting Layers, and sprite sort points are independent; in this URP 2D project the renderer asset controls the transparency sort axis.
+**Criteria:** 5/5 passed; Y-sorting was verified with a temporary individual sprite, not the painted treeline.
+**Commit:** `f3d1ff1` (`feat: layer scheme and y-sorting`)
+**Felt:** The editor setup took longer than wanted, but the sprite finally switched draw order in Play Mode.
+
 **Follow-up (2026-09-26):** Simplified the remaining plaza trim and moved Alex's sprite order above Ground, Detail, and Obstacles but below Above. The automated painter initially saved before Tilemap Collider 2D processed its new tiles, leaving only the old brick in the Composite Collider. Forcing tilemap changes and regenerating the composite produced multiple saved outline paths; Play Mode confirmed the new building footprints block Alex. The buildings are intentionally closed footprints, not enterable interiors. Fix commit: `021db06`. Day 18 remains 5/5.
