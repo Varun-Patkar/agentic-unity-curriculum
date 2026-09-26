@@ -204,3 +204,12 @@ Took it. Streak intact.
 **Criteria:** 4/5 passed; the layout does not yet read as a modern town square. Finish the visual pass before Day 19.
 **Commit:** `61bbb7e` (`wip: day 18, tilemap collision works; town square unfinished`)
 **Felt:** Painting got boring quickly; the collision diagnosis was a better use of the hour. Tired, stopping on time.
+
+### Day 18 follow-up — 2026-09-26 — M02 — Finish the town square
+
+**Built:** Delegated repetitive painting to a reusable Unity Editor painter. The one-screen square now has distinct Town Hall and diner footprints, signs, a paved plaza, a solid asphalt road with sparse markings and simpler sidewalk strips, parked-car shapes, and a treeline. Verified saved tile coverage and an unobstructed player spawn in a batch Editor run; reviewed Scene and Game view screenshots.
+**Broke:** The first automated layout repeated edge and transparent marking sprites as fills, making the road striped and buildings outlined. Selected solid center tiles by inspecting sprite pixel data, removed unused generated tile assets, and re-ran the Unity scene audit.
+**Learned:** An atlas's edge and center sprites are not interchangeable; check the actual scene at game scale before declaring an automated tile fill done.
+**Criteria:** Day 18 now 5/5; existing obstacle collision and quick palette painting were verified on 2026-09-25. Camera follow remains scheduled for Day 20.
+**Commit:** `81b7c2d` (`feat: paint hollowbrook town square`)
+**Felt:** Automation was useful once the visual mistakes were caught in Game view; a fixed camera still feels limiting.

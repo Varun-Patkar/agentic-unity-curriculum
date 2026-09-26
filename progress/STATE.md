@@ -3,21 +3,21 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 18
+day: 19
 date_of_day_1: 2026-09-09
-last_session: 2026-09-25
+last_session: 2026-09-26
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M02
 milestone_title: Movement & Feel
-milestone_day: 4        # 1-6 = content, 7 = buffer
+milestone_day: 5        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
 render_pipeline: URP
 
-status: partial
+status: ready
 ```
 
 ## What exists
@@ -62,10 +62,11 @@ status: partial
 - `PlayerMovement` accelerates to speed 5 at rate 20 and stops at rate 30; last non-zero facing direction is retained, the sprite flips left/right, and Rigidbody2D interpolation is enabled. Dialogue still stops movement.
 - `Hollowbrook_TownSquare` has four tilemaps (`Ground`, `Detail`, `Obstacles`, `Above`) with a Kenney CC0 tileset at 32 PPU on a half-unit Grid; pavement, a road strip, and a brick block are painted.
 - `Obstacles` has a merged Tilemap/Composite Collider 2D on a static Rigidbody2D; Alex's Capsule Collider 2D stops him at the brick block.
+- Day 18's town square now reads as a modern block with distinct Town Hall and diner footprints, a central plaza, solid asphalt with sparse lane markings, parked-car shapes, and a treeline; a reusable Editor painter produced the scene through Unity APIs.
 
 ## What is broken
 
-- [D18] The painted area is still a plain test layout; it does not yet read as a modern town square.
+*Nothing.*
 
 ## Parked
 
@@ -73,10 +74,11 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 - [D8] Chicken trigger bounds remain generous; tune them on a buffer day.
 - [D12] Audio source URLs, authors, and licences are unknown; verify `ATTRIBUTIONS.md` before distribution.
+- [D18] Art is intentionally placeholder-scale; consider improving the parked cars and sidewalk on a later polish day. The fixed camera crops at narrow Free Aspect; Day 20 covers camera follow and bounds.
 
 ## Next action
 
-**Day 18** — finish one screen of town-square art (town hall and diner footprints, trees, parked-car shapes); then verify the fifth criterion before Day 19.
+**Day 19** — design collision layers, Y-sorting, and player colliders following the M02 brief.
 
 ---
 
