@@ -224,3 +224,12 @@ Took it. Streak intact.
 **Felt:** The editor setup took longer than wanted, but the sprite finally switched draw order in Play Mode.
 
 **Follow-up (2026-09-26):** Simplified the remaining plaza trim and moved Alex's sprite order above Ground, Detail, and Obstacles but below Above. The automated painter initially saved before Tilemap Collider 2D processed its new tiles, leaving only the old brick in the Composite Collider. Forcing tilemap changes and regenerating the composite produced multiple saved outline paths; Play Mode confirmed the new building footprints block Alex. The buildings are intentionally closed footprints, not enterable interiors. Fix commit: `021db06`. Day 18 remains 5/5.
+
+### Day 20 — 2026-09-27 — M02 — Cinemachine camera follow
+
+**Built:** Installed Cinemachine 6.6, added a camera that follows Alex with a 0.1 dead zone and 0.5 damping, confined the view to a separate trigger polygon around the painted town, and added an impulse source and listener. Tested a tuned impulse with Space, then removed the temporary input hook. Removed the no-longer-needed town-square Editor painter and its `.meta` file.
+**Broke:** The camera initially stayed still because Position Control was None, despite Alex being the tracking target; Position Composer fixed it. The default impulse moved only vertically, so its velocity was tuned. Alex can still walk beyond the painted map; the confiner stops the camera, not the player.
+**Learned:** A tracking target needs a position-control rule; Confiner 2D constrains the camera view, while the impulse source and listener provide reusable camera feedback without changing player movement.
+**Criteria:** 5/5 passed in Play Mode; no void, judder, or shimmer observed during the movement check.
+**Commit:** `8036b55` (`feat: cinemachine follow camera with confiner and impulse`)
+**Felt:** Like a low-budget Hollow Knight; the camera stopped drawing attention to itself.

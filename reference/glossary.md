@@ -129,3 +129,11 @@ Unity and gamedev vocabulary, defined for someone who already writes software. S
 **Action map** — a named input context whose enabled actions respond to their bindings; switching maps changes what the same key means. *(D16)*
 
 **Generated input class** — the C# wrapper Unity regenerates from an `.inputactions` asset, exposing named maps and actions without string lookups. Do not edit it by hand. *(D16)*
+
+**Cinemachine Brain / Cinemachine Camera** — the Brain drives the real Main Camera from a virtual camera's framing instructions; a tracking target alone does not specify how to move the camera. *(D20)*
+
+**Dead zone / damping** — a screen region where the target may move without camera motion, and the rate at which the camera catches up afterward. *(D20)*
+
+**Confiner 2D** — restricts the camera's visible frame to a Collider 2D shape; it does not restrict the player. *(D20)*
+
+**Impulse source / listener** — components that broadcast a short directional camera bump and apply it to a listening camera. *(D20)*

@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 20
+day: 21
 date_of_day_1: 2026-09-09
-last_session: 2026-09-26
+last_session: 2026-09-27
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M02
 milestone_title: Movement & Feel
-milestone_day: 6        # 1-6 = content, 7 = buffer
+milestone_day: 7        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
@@ -62,15 +62,17 @@ status: ready
 - `PlayerMovement` accelerates to speed 5 at rate 20 and stops at rate 30; last non-zero facing direction is retained, the sprite flips left/right, and Rigidbody2D interpolation is enabled. Dialogue still stops movement.
 - `Hollowbrook_TownSquare` has four tilemaps (`Ground`, `Detail`, `Obstacles`, `Above`) with a Kenney CC0 tileset at 32 PPU on a half-unit Grid; pavement, a road strip, and a brick block are painted.
 - `Obstacles` has a merged Tilemap/Composite Collider 2D on a static Rigidbody2D; Alex's Capsule Collider 2D stops him at the brick block.
-- Day 18's town square now reads as a modern block with distinct Town Hall and diner footprints, a central plaza, solid asphalt with sparse lane markings, parked-car shapes, and a treeline; a reusable Editor painter produced the scene through Unity APIs.
+- Day 18's town square now reads as a modern block with distinct Town Hall and diner footprints, a central plaza, solid asphalt with sparse lane markings, parked-car shapes, and a treeline; a temporary Editor painter produced the scene through Unity APIs and was removed on Day 20.
 - Physics layers and a deliberate 2D collision matrix keep Alex colliding with obstacles; the layer scheme is recorded in the project's conventions.
 - The URP 2D Renderer sorts `Entities` sprites by Y; Alex's feet pivot and a temporary tree proved he draws behind objects when above and in front when below. The test tree was removed afterward.
 - Alex has a small solid feet capsule and a larger interaction trigger; movement and obstacle collision still work without Console errors.
 - The painted building and treeline footprints now generate composite collider outlines and block Alex; his sprite renders above Detail and Obstacles but below Above. Town Hall is a closed footprint, not an interior.
+- A Cinemachine camera follows Alex with a tuned 0.1 dead zone and 0.5 damping; a separate trigger polygon confines the view to the painted town without void, judder, or visible shimmer.
+- An impulse source on Alex and listener on the camera produce a tested, tuned bump; the temporary Space test hook was removed. Cinemachine 6.6 is installed.
 
 ## What is broken
 
-*Nothing.*
+- [D20] Alex can walk beyond the painted town on some edges; the camera stops correctly, but no player boundary blocks him there.
 
 ## Parked
 
@@ -83,7 +85,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 20** — set up and tune Cinemachine camera follow, dead zone, bounds, and impulse following the M02 brief.
+**Day 21 BUFFER** — offer catch up, polish, explore, or rest; if catch up is chosen, add a player boundary without turning the camera confiner into a solid polygon.
 
 ---
 
