@@ -233,3 +233,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed in Play Mode; no void, judder, or shimmer observed during the movement check.
 **Commit:** `8036b55` (`feat: cinemachine follow camera with confiner and impulse`)
 **Felt:** Like a low-budget Hollow Knight; the camera stopped drawing attention to itself.
+
+### Day 21 — 2026-09-28 — BUFFER — catch up
+
+**Built:** Added a solid five-point Edge Collider 2D on a child of the camera bounds, on the obstacle layer. Alex stops at all four edges and cannot wiggle around the corners; the separate trigger polygon still confines the camera.
+**Broke:** Nothing reported. Play Mode passed the edge checks and the Console was clear after saving.
+**Learned:** A camera confiner constrains the view, not the player; a solid edge can trace its perimeter without making the trigger polygon block the playable interior.
+**Criteria:** 3/3 buffer checks passed: all borders block Alex, the camera remains confined, and no Console errors.
+**Commit:** `fix: keep alex inside town bounds`
+**Felt:** Kept the momentum instead of resting; closed the gap left by Day 20.

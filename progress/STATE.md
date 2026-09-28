@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 21
+day: 22
 date_of_day_1: 2026-09-09
-last_session: 2026-09-27
+last_session: 2026-09-28
 days_missed_total: 0
 projected_end: 2026-12-29
 
-milestone: M02
-milestone_title: Movement & Feel
-milestone_day: 7        # 1-6 = content, 7 = buffer
+milestone: M03
+milestone_title: The Core
+milestone_day: 1        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
@@ -69,10 +69,11 @@ status: ready
 - The painted building and treeline footprints now generate composite collider outlines and block Alex; his sprite renders above Detail and Obstacles but below Above. Town Hall is a closed footprint, not an interior.
 - A Cinemachine camera follows Alex with a tuned 0.1 dead zone and 0.5 damping; a separate trigger polygon confines the view to the painted town without void, judder, or visible shimmer.
 - An impulse source on Alex and listener on the camera produce a tested, tuned bump; the temporary Space test hook was removed. Cinemachine 6.6 is installed.
+- A solid Edge Collider 2D child of the camera bounds blocks Alex at all four town edges; the camera confiner remains a trigger, the corner wiggle test passed, and the Console is clear.
 
 ## What is broken
 
-- [D20] Alex can walk beyond the painted town on some edges; the camera stops correctly, but no player boundary blocks him there.
+- None known.
 
 ## Parked
 
@@ -85,7 +86,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 21 BUFFER** — offer catch up, polish, explore, or rest; if catch up is chosen, add a player boundary without turning the camera confiner into a solid polygon.
+**Day 22** — create the engine-free Core assembly and dependent Unity, Editor, and test assemblies; verify the dependency wall and one green test.
 
 ---
 
