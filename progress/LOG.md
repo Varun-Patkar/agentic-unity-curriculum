@@ -242,3 +242,12 @@ Took it. Streak intact.
 **Criteria:** 3/3 buffer checks passed: all borders block Alex, the camera remains confined, and no Console errors.
 **Commit:** `fix: keep alex inside town bounds`
 **Felt:** Kept the momentum instead of resting; closed the gap left by Day 20.
+
+### Day 22 — 2026-09-30 — M03 — Assembly definitions and test harness
+
+**Built:** Created three assemblies (`Hollowbrook.Core`, `Hollowbrook.Unity`, `Hollowbrook.Editor`) with a hard dependency wall preventing Core from referencing UnityEngine; created test assembly with NUnit and Unity Test Runner references.
+**Broke:** Expected errors when proving the wall works (Core code showed "UnityEngine could not be found" — this is correct behavior).
+**Learned:** Assembly definitions make compiler-enforced architecture rules impossible to ignore; the dependency wall is now a compile error, not a convention.
+**Criteria:** 4/4 passed: four assemblies exist, using UnityEngine in Core is a compile error, existing gameplay still works, one test runs green.
+**Commit:** `chore: assembly definitions with engine-free core`
+**Felt:** The compiler is now my enforcer; no more accidental engine leaks into Core.

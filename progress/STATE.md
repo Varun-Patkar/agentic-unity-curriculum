@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 22
+day: 23
 date_of_day_1: 2026-09-09
-last_session: 2026-09-28
+last_session: 2026-09-30
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M03
 milestone_title: The Core
-milestone_day: 1        # 1-6 = content, 7 = buffer
+milestone_day: 2        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
