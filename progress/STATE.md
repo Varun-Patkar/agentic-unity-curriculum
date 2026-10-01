@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 23
+day: 24
 date_of_day_1: 2026-09-09
-last_session: 2026-09-30
+last_session: 2026-10-01
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M03
 milestone_title: The Core
-milestone_day: 2        # 1-6 = content, 7 = buffer
+milestone_day: 3        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
@@ -70,6 +70,9 @@ status: ready
 - A Cinemachine camera follows Alex with a tuned 0.1 dead zone and 0.5 damping; a separate trigger polygon confines the view to the painted town without void, judder, or visible shimmer.
 - An impulse source on Alex and listener on the camera produce a tested, tuned bump; the temporary Space test hook was removed. Cinemachine 6.6 is installed.
 - A solid Edge Collider 2D child of the camera bounds blocks Alex at all four town edges; the camera confiner remains a trigger, the corner wiggle test passed, and the Console is clear.
+- `Hollowbrook.Core` has no Unity references; the Unity, Editor, and Core.Tests assemblies enforce the dependency boundary, and EditMode tests pass.
+- `GameState` models a run with typed location, player identity, elapsed time, flags, decisions, town preparation, bargain terms, quests, and profile history.
+- `GameStateFactory.NewGame` creates fresh run-scoped state while retaining the supplied `PlaythroughHistory`; tests verify defaults, history retention, and per-run object isolation.
 
 ## What is broken
 
@@ -86,7 +89,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 22** — create the engine-free Core assembly and dependent Unity, Editor, and test assemblies; verify the dependency wall and one green test.
+**Day 24** — add typed flags, the decision ledger, and profile-history behavior; preserve profile history across new games.
 
 ---
 

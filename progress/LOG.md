@@ -249,5 +249,14 @@ Took it. Streak intact.
 **Broke:** Expected errors when proving the wall works (Core code showed "UnityEngine could not be found" — this is correct behavior).
 **Learned:** Assembly definitions make compiler-enforced architecture rules impossible to ignore; the dependency wall is now a compile error, not a convention.
 **Criteria:** 4/4 passed: four assemblies exist, using UnityEngine in Core is a compile error, existing gameplay still works, one test runs green.
-**Commit:** `chore: assembly definitions with engine-free core`
+**Commit:** `b136314` (combined with Day 23: `feat(core): add assembly boundary and game state model`)
 **Felt:** The compiler is now my enforcer; no more accidental engine leaks into Core.
+
+### Day 23 — 2026-10-01 — M03 — Modelling world state as plain C#
+
+**Built:** Added an engine-free `GameState` and `GameStateFactory.NewGame`; new runs start at Town Square as Alex, receive fresh flags, decisions, preparation, bargain, and quest state, and retain the supplied profile history. EditMode tests pass for defaults, identity preservation, and per-run isolation.
+**Broke:** Unity's C# 9 compiler rejected the record structs, and a trailing comma made the Core asmdef invalid JSON. Replaced the IDs with C# 9-compatible readonly structs and corrected the asmdef.
+**Learned:** A new run gets fresh run-scoped state; profile history is passed through because it belongs to the profile, not the run.
+**Criteria:** 5/5 passed
+**Commit:** `b136314` (`feat(core): add assembly boundary and game state model`)
+**Felt:** The boundary between this run and the player profile is clear now.
