@@ -260,3 +260,12 @@ Took it. Streak intact.
 **Criteria:** 5/5 passed
 **Commit:** `b136314` (`feat(core): add assembly boundary and game state model`)
 **Felt:** The boundary between this run and the player profile is clear now.
+
+### Day 24 — 2026-10-02 — M03 — Flags, decisions, and profile history
+
+**Built:** Added typed flags and their registry, a structured chronological decision ledger, separate town-preparation and bargain flag stores, and profile ending history preserved across new games. Added EditMode tests for flag idempotency/clear, decision lookup/order, store isolation, and first-ending eligibility.
+**Broke:** An uninitialized flag set and a discarded LINQ `Append` were caught during implementation; initialized the set and used the list's mutating add. Corrected property access in the tests.
+**Learned:** Run state resets between games; ending history belongs to the profile and survives that reset.
+**Criteria:** 7/7 passed; user confirmed the Unity tests passed.
+**Commit:** `2c2fe5e` (`feat(core): decision ledger and playthrough history`)
+**Felt:** Dragged on, but the tests are green.

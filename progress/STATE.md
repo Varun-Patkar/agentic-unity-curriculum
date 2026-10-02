@@ -3,15 +3,15 @@
 **Agents: read this first, write to it last. Keep it terse and true.**
 
 ```yaml
-day: 24
+day: 25
 date_of_day_1: 2026-09-09
-last_session: 2026-10-01
+last_session: 2026-10-02
 days_missed_total: 0
 projected_end: 2026-12-29
 
 milestone: M03
 milestone_title: The Core
-milestone_day: 3        # 1-6 = content, 7 = buffer
+milestone_day: 4        # 1-6 = content, 7 = buffer
 
 active_project: D:\Projects\Unity Games\Hollowbrook
 unity_version: 6000.6.0f1
@@ -73,6 +73,7 @@ status: ready
 - `Hollowbrook.Core` has no Unity references; the Unity, Editor, and Core.Tests assemblies enforce the dependency boundary, and EditMode tests pass.
 - `GameState` models a run with typed location, player identity, elapsed time, flags, decisions, town preparation, bargain terms, quests, and profile history.
 - `GameStateFactory.NewGame` creates fresh run-scoped state while retaining the supplied `PlaythroughHistory`; tests verify defaults, history retention, and per-run object isolation.
+- Typed `FlagId` storage and a `KnownFlags` registry support flags; the chronological `DecisionLedger`, separate `PreparedTown` and `BargainTerms` stores, and profile ending history are covered by EditMode tests for idempotency, lookup/order, isolation, and eligibility across new games.
 
 ## What is broken
 
@@ -89,7 +90,7 @@ Things noticed but deliberately deferred. Revisit on buffer days.
 
 ## Next action
 
-**Day 24** — add typed flags, the decision ledger, and profile-history behavior; preserve profile history across new games.
+**Day 25** — expand Core EditMode coverage with a `GameStateBuilder`, then add injected time/random dependencies where needed.
 
 ---
 
